@@ -154,8 +154,7 @@ public final class Constants {
 
     public static final class GeneralConstants {
 
-        public static final boolean fancy_drive = true, 
-                                    tFlightHotasOne_drive = true;
+        public static final boolean relative_drive = true;
         
         public static final double joystick_deadzone = 0.2,
                                    axis_exponent = 1.3;
