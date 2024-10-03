@@ -32,10 +32,7 @@ public class RobotContainer {
 
     /* Driver Buttons */
     private final Trigger zeroGyro = new JoystickButton(driver_XBox, XboxController.Button.kStart.value);
-
     private final Trigger robotCentric = new JoystickButton(driver_XBox, XboxController.Button.kY.value);
-
-    /* Custom Triggers */
 
     /* Subsystems */
     private final Swerve swerve = new Swerve();

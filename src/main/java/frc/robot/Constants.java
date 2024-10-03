@@ -107,9 +107,8 @@ public final class Constants {
 
         /* Which is which */
 
-        public static final int joystick_usb_port = 0, 
-                                driver_usb_port = 2, 
-                                operator_usb_port = 1;
+        public static final int operator_usb_port = 1,
+                                driver_usb_port = 2;
 
         /* Driver Buttons */
 
