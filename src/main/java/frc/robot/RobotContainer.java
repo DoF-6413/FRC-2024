@@ -112,19 +112,19 @@ public class RobotContainer {
         /* Driver Triggers */
         zeroGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro(0)));
         
-        // makeX.onTrue(new InstantCommand(() -> swerve.makeX())); button conflict :(
-
         /* Operator Triggers */
         operator.a().whileTrue(Commands.startEnd(flywheel::outtake, flywheel::stop, flywheel));
         operator.y().whileTrue(Commands.startEnd(flywheel::amp, flywheel::stop, flywheel));
         operator.b().toggleOnTrue(new RetractConveyor(conveyor)); // also ends all other commands requiring flywheel
-
         operator.x().toggleOnTrue(new SetArmPosition(pivot, starting_angle));
         operator.start().toggleOnTrue(new ResetHangCommand(hang));
 
         // shooting
         operator.leftTrigger(0.8).toggleOnTrue(ShootingCommands.amp(pivot));
-        operator.rightTrigger(0.8).whileTrue(Commands.startEnd(() -> { Variables.bypass_angling = true; }, () -> { Variables.bypass_angling = false; }));
+        operator.rightTrigger(0.8).whileTrue(Commands.startEnd(
+              () -> { Variables.bypass_angling = true; },
+              () -> { Variables.bypass_angling = false; })
+        );
 
         // intake
         operator.leftBumper().toggleOnTrue(new IntakeCommand(pivot, intake, conveyor).handleInterrupt(() -> new RetractConveyor(conveyor).schedule()));
@@ -150,9 +150,10 @@ public class RobotContainer {
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
      *
-     * @return the command to run in autonomous
+     * @return the command to run in autonomous (plus code to bring the climber down)
      */
     public Command getAutonomousCommand() {
+        // TODO: Simplify and call the climber reset code elsewhere and not here!
         return new ParallelCommandGroup(
             Autonomous.getAutonomousCommand(),
             new ResetHangCommand(hang)
@@ -162,9 +163,5 @@ public class RobotContainer {
     public void teleopInit() {
         swerve.teleopInit();
         pivot.brake();
-    }
-
-    public Swerve getSwerve() {
-        return swerve;
     }
 }

@@ -96,6 +96,7 @@ public final class Constants {
 
     }
 
+
     public static final class Buttons {
 
         /* D-pad */
@@ -105,7 +106,7 @@ public final class Constants {
                                 dpad_down = 180, 
                                 dpad_left = 270;
 
-        /* Which is which */
+        /* Which USB port is used for the different controllers */
 
         public static final int operator_usb_port = 1,
                                 driver_usb_port = 2;
@@ -144,77 +145,153 @@ public final class Constants {
                                 joystickZeroGyroButton = 4, 
                                 joystickMakeXButton = 2, 
                                 joystickDriveToAmpButton = 4; // if we push the slider forward it cancels commands
-                                // .getPOV() is the same for joystick; joystick is a T.Flight Hotas One
 
         /* Operator Buttons */
+
         public static final int terminateCommandsOperatorButton = XboxController.Button.kBack.value;
-        
     }
+
 
     public static final class GeneralConstants {
 
         public static final boolean relative_drive = true;
-        
-        public static final double joystick_deadzone = 0.2,
-                                   axis_exponent = 1.3;
+
+        public static final double joystick_deadzone = 0.2; // The deadband value to use on any joystick
+
+        public static final double axis_exponent = 1.3;
         
         public static final double starting_yaw = 0; // shoot this might depend based on autonomous... we can make a new command xoxo
-        
+
+        // TODO: ONLY constant values should be in this file, NOT functions!  These
+        // should get put into a separate place or inlined where they are used!
+
+        /**
+         * Calculates the signed power of the given axis value.
+         *
+         * This function applies a deadband to the input value to reduce noise and jitter.
+         * It then calculates the power of the absolute value of the input value using the
+         * specified exponent. The sign of the output is determined by the sign of the input value.
+         *
+         * @param axis_value The input axis value.
+         *
+         * @return The signed power of the input value.
+         */
         public static final double signedPower(double axis_value) {
+            // Apply a deadband to the value so that any values in the deadband become 0
             axis_value = MathUtil.applyDeadband(axis_value, joystick_deadzone);
-            if (axis_value == 0) return 0;
-            if (axis_value < 0) return 0 - Math.pow(0 - axis_value, axis_exponent);
+
+            // If the value is 0 we are done
+            if (axis_value == 0)
+                return 0;
+
+            // Calculate the signed power.  If the value is negative, then we want
+            // the returned value to also be negative.
+            if (axis_value < 0)
+                return 0 - Math.pow(0 - axis_value, axis_exponent);
+
+            // Otherwise we return the positive signed power
             return Math.pow(axis_value, axis_exponent);
         }
-        
-        /** Normalizes angle to between -180 and 180 */
+
+
+        /**
+         * Normalizes an angle to the range of -180 to 180 degrees (in theory) but it may not quite
+         * do this for negative angles (see detailed comments inside).
+         *
+         * This function ensures that the input angle is always represented in the range of -180 to 180 degrees (UNTRUE).
+         * It is useful for applications that deal with angles or rotations.
+         *
+         * @param degrees The input angle in degrees.
+         *
+         * @return The normalized angle in the range of -180 to 180 degrees.
+         */
         public static double normalizeAngle(double degrees) {
-            if (degrees < 0) return ((degrees - 180) % 360 + 180);
+            // If the input angle degrees is negative, subtract 180 degrees then modulo it for 360 degrees and
+            // then add 180 degrees. This effectively maps a negative angle to a positive angle in the range
+            // of 180 to 360 degrees; NOT -180 to 180 or -180 to 0.
+            if (degrees < 0)
+                return ((degrees - 180) % 360 + 180);
+
+            // If the input angle is positive, add 180 degrees then modulo it for 360 degrees and then subtract
+            // 180 degrees.  This effectively maps a non-negative angle to a negative angle in the range
+            // of 0 to -180 degrees.
             return ((degrees + 180) % 360 - 180);
         }
 
-        public static final double getPECorrection(double error, double proportional, double exponent, double min_power, double max_power) {
-            if (Math.abs(error) == 0) return 0;
 
+        /**
+         * Calculates a Proportional-Exponent (PE) correction value based on the given error.
+         *
+         * This function is commonly used in control systems to determine a corrective output based on
+         * the error between the desired and actual values. It uses a proportional and exponential
+         * relationship to calculate the correction.
+         *
+         * @param error The error between the desired and actual values.
+         * @param proportional The proportional constant.
+         * @param exponent The exponent for the error calculation.
+         * @param min_power The minimum power value.
+         * @param max_power The maximum power value.
+         *
+         * @return The calculated PE correction value.
+         */
+        public static final double getPECorrection(double error, double proportional, double exponent, double min_power, double max_power) {
+            // If the error is zero no correction is needed and we are done here.
+            if (Math.abs(error) == 0)
+                return 0;
+
+            // Set the multiplier to the max_power if the error is positive and to the negative of max_power if
+            // the error is negative. This ensures the correction is applied in the correct direction.
             double multiplier = max_power;
             if (error < 0) {
                 error = 0 - error;
                 multiplier = -max_power;
             }
 
+            // Calculate the proportional error
             error *= proportional / max_power; // as a proportion of maximum power
+
+            // Clamp the error at 1 to prevent over correction
             error = Math.min(error, 1);
 
+            // Calculate the power with the proper magnitude and direction of the correction.
             double calculated_power = Math.pow(error, exponent) * multiplier;
 
+            // Return 0 if the absolute value of the calculated power is less than the min_power to avoid small,
+            // insignificant corrections. Otherwise, return the calculated power.
             return (Math.abs(calculated_power) < min_power) ? 0 : calculated_power;
         }
 
+        // TODO: Change to return nothing since no callers in this code check the return value.
         /** Returns false if the key already exists with a different type */
         public static final boolean log(String key, String value) {
             return SmartDashboard.putString(key, value);
         }
 
+        // TODO: Change to return nothing since no callers in this code check the return value.
         /** Returns false if the key already exists with a different type */
         public static final boolean log(String key, String[] value) {
             return SmartDashboard.putStringArray(key, value);
         }
         
+        // TODO: Change to return nothing since no callers in this code check the return value.
         /** Returns false if the key already exists with a different type */
         public static final boolean log(String key, double value) {
             return SmartDashboard.putNumber(key, value);
         }
         
+        // TODO: Change to return nothing since no callers in this code check the return value.
         /** Returns false if the key already exists with a different type */
         public static final boolean log(String key, double[] value) {
             return SmartDashboard.putNumberArray(key, value);
         }
         
+        // TODO: Change to return nothing since no callers in this code check the return value.
         /** Returns false if the key already exists with a different type */
         public static final boolean log(String key, boolean value) {
             return SmartDashboard.putBoolean(key, value);
         }
         
+        // TODO: Change to return nothing since no callers in this code check the return value.
         /** Returns false if the key already exists with a different type */
         public static final boolean log(String key, boolean[] value) {
             return SmartDashboard.putBooleanArray(key, value);
