@@ -42,7 +42,11 @@ public class RobotContainer {
     private final Pivot pivot = new Pivot();
     private final Hang hang = new Hang();
 
+    // Create SmartDashboard chooser for autonomous routines
+    private final SendableChooser<Command> m_autoChooser = new SendableChooser<>();
+
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
+
     public RobotContainer() {
 
         if (relative_drive) {
@@ -102,6 +106,7 @@ public class RobotContainer {
         configureNamedCommands();
     }
 
+
     /**
      * Use this method to define your button->command mappings. Buttons can be created by
      * instantiating a {@link GenericHID} or one of its subclasses ({@link
@@ -138,6 +143,16 @@ public class RobotContainer {
                 new InstantCommand(conveyor::stop, conveyor)
             ).handleInterrupt(() -> { conveyor.stop(); })
         );
+
+        // Setup SmartDashboard options for Autonomous selection
+        m_autoChooser.setDefaultOption("Do Nothing", new ParallelCommandGroup(
+            new InstantCommand(() -> swerve.brake()),
+            new InstantCommand(() -> intake.stop()),
+            new InstantCommand(() -> conveyor.stop())));
+
+        // TODO: Add new Autos with lines like: m_autoChooser.addOption("Auto Routine Time", new AutonomousTime(m_drivetrain));
+
+        SmartDashboard.putData(m_autoChooser);
     }
 
     public void configureNamedCommands() {
@@ -150,14 +165,10 @@ public class RobotContainer {
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
      *
-     * @return the command to run in autonomous (plus code to bring the climber down)
+     * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
-        // TODO: Simplify and call the climber reset code elsewhere and not here!
-        return new ParallelCommandGroup(
-            Autonomous.getAutonomousCommand(),
-            new ResetHangCommand(hang)
-        ).handleInterrupt(() -> Variables.bypass_rotation = false);
+        return m_autoChooser.getSelected();
     }
 
     public void teleopInit() {
