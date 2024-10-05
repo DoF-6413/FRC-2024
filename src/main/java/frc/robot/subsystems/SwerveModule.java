@@ -21,7 +21,7 @@ import frc.robot.Robot;
 
 public class SwerveModule {
     public int moduleNumber;
-    private Rotation2d ANGLE_OFFSET;
+    private Rotation2d angleOffset;
 
     private TalonFX mAngleMotor;
     private TalonFX mDriveMotor;
@@ -39,7 +39,7 @@ public class SwerveModule {
 
     public SwerveModule(int moduleNumber, SwerveModuleConstants moduleConstants) {
         this.moduleNumber = moduleNumber;
-        this.ANGLE_OFFSET = moduleConstants.ANGLE_OFFSET;
+        this.angleOffset = moduleConstants.ANGLE_OFFSET;
         
         /* Angle Encoder Config */
         angleEncoder = new CANcoder(moduleConstants.CANCODER_ID);
@@ -83,7 +83,7 @@ public class SwerveModule {
     }
 
     public void resetToAbsolute() {
-        double absolutePosition = getCANcoder().getRotations() - ANGLE_OFFSET.getRotations();
+        double absolutePosition = getCANcoder().getRotations() - angleOffset.getRotations();
         mAngleMotor.setPosition(USE_CANCODERS ? absolutePosition : -0.25);
     }
 
@@ -97,7 +97,7 @@ public class SwerveModule {
     public SwerveModuleState getCanState() {
         return new SwerveModuleState(
             Conversions.RPSToMPS(mDriveMotor.getVelocity().getValue(), Constants.BaseFalconSwerveConstants.WHEEL_CIRCUMFERENCE), 
-            Rotation2d.fromRotations(getCANcoder().getRotations() - ANGLE_OFFSET.getRotations())
+            Rotation2d.fromRotations(getCANcoder().getRotations() - angleOffset.getRotations())
         );
     }
 
