@@ -45,7 +45,7 @@ public class TeleopSwerveRelativeDirecting extends Command {
         /* Get Values, Deadband*/
         double translationVal = signedPower(translationSup.getAsDouble());
         double strafeVal = signedPower(strafeSup.getAsDouble());
-        double rotationVal = signedPower(rotationSup.getAsDouble()) * teleop_rotation_percent;
+        double rotationVal = signedPower(rotationSup.getAsDouble()) * TELEOP_ROTATIO_PERCENT;
 
         if ((rotationVal) == 0 && (targetSup.getAsInt() % 90 == 0)) swerve.setTargetHeading(targetSup.getAsInt() + (Variables.isBlueAlliance ? 0 : 180));
 
@@ -62,8 +62,8 @@ public class TeleopSwerveRelativeDirecting extends Command {
 
         /* Drive */
         swerve.drive(
-            new Translation2d(translationVal, strafeVal).times(Constants.BaseFalconSwerveConstants.maxSpeed).times(slowSup.getAsDouble()), 
-            rotationVal * Constants.BaseFalconSwerveConstants.maxAngularVelocity * (turn_slow_ratio - 1 + slowSup.getAsDouble()) / turn_slow_ratio, 
+            new Translation2d(translationVal, strafeVal).times(Constants.BaseFalconSwerveConstants.MAX_SPEED).times(slowSup.getAsDouble()), 
+            rotationVal * Constants.BaseFalconSwerveConstants.MAX_ANGULAR_VELOCITY * (turn_slow_ratio - 1 + slowSup.getAsDouble()) / turn_slow_ratio, 
             !robotCentricSup.getAsBoolean(), 
             true
         );

@@ -15,10 +15,10 @@ public class Pivot extends SubsystemBase {
     private DoubleLogEntry targetAngleLog, currentAngleLog;
 
     public Pivot() {
-        pivot_motor = new PIGETalon(pivot_motor_ID, pivot_motor_max_continuous_current, pivot_motor_max_current, 
-            pivot_motor_brake, pivot_motor_clockwise_positive, starting_angle, starting_angle, amp_angle, pivot_motor_min_percent_output, 
-            pivot_motor_max_percent_output, pivot_motor_max_percent_output_per_second, pivot_motor_gear_ratio, 
-            pivot_motor_invert_sensor, pivot_motor_calibration_time, pivot_p, pivot_i, pivot_g, pivot_e, pivot_zero
+        pivot_motor = new PIGETalon(PIVOT_MOTOR_ID, PIVOT_MOTOR_MAX_CONTINOUS_CURRENT, PIVOT_MOTOR_MAX_CURRENT, 
+            PIVOT_MOTOR_BRAKE, PIVOT_MOTOR_CLOCKWISE_POSITIVE, STARTING_ANGLE, STARTING_ANGLE, AMP_ANGLE, PIVOT_MOTOR_MIN_PERCENT_OUTPUT, 
+            PIVOT_MOTOR_MAX_PERCENT_OUTPUT, PIVOT_MOTOR_MIN_PERCENT_OUTPUT_PER_SECOND, PIVOT_MOTOR_GEAR_RATIO, 
+            PIVOT_MOTOR_INVERT_SENSOR, PIVOT_MOTOR_CALIBRATION_TIME, PIVOT_P, PIVOT_I, PIVOT_G, PIVOT_E, PIVOT_ZERO
         );
 
         var log = DataLogManager.getLog();
@@ -60,19 +60,19 @@ public class Pivot extends SubsystemBase {
     }
 
     public boolean pidCloseEnough() {
-        return Math.abs(getCurrentError()) < pivot_angle_tolerance;
+        return Math.abs(getCurrentError()) < PIVOT_ANGLE_TOLERANCE;
     }
 
     public boolean isFree() {
-        return pivot_motor.getCurrent() < pivot_motor_free_current;
+        return pivot_motor.getCurrent() < PIVOT_MOTOR_FREE_CURRENT;
     }
 
     @Override
     public void periodic() {
         log("Pivot Current", pivot_motor.getCurrent());
         log("Pivot Motor Get", pivot_motor.get());
-        log("Pivot Motor Sine", Math.sin((pivot_zero - pivot_motor.getEncoderPosition()) * Math.PI / 180));
-        log("Possibly kG", pivot_motor.get() / Math.sin((pivot_zero - pivot_motor.getEncoderPosition()) * Math.PI / 180));
+        log("Pivot Motor Sine", Math.sin((PIVOT_ZERO - pivot_motor.getEncoderPosition()) * Math.PI / 180));
+        log("Possibly kG", pivot_motor.get() / Math.sin((PIVOT_ZERO - pivot_motor.getEncoderPosition()) * Math.PI / 180));
         log("Current Pivot Angle", pivot_motor.getEncoderPosition());
         log("Target Pivot Angle", pivot_motor.getTarget());
         log("Pivot At Target", pidCloseEnough() ? "yes" : "no");

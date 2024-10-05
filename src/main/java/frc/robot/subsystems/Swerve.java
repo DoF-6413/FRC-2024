@@ -71,23 +71,23 @@ public class Swerve extends SubsystemBase {
     private Limelight limelight;
 
     public Swerve() {
-        pie = new PIECalculator(teleop_angle_p, teleop_angle_i, teleop_angle_e, swerve_min_pid_rotation * Constants.BaseFalconSwerveConstants.maxAngularVelocity, swerve_max_pid_rotation * Constants.BaseFalconSwerveConstants.maxAngularVelocity, starting_yaw);
+        pie = new PIECalculator(TELEOP_ANGLE_P, TELEOP_ANGLE_I, TELEOP_ANGLE_E, SWERVE_MIN_PID_ROTATION * Constants.BaseFalconSwerveConstants.MAX_ANGULAR_VELOCITY, SWERVE_MAX_PID_ROTATION * Constants.BaseFalconSwerveConstants.MAX_ANGULAR_VELOCITY, STARTING_YAW);
 
-        gyro = new Pigeon2(Constants.BaseFalconSwerveConstants.pigeonID);
+        gyro = new Pigeon2(Constants.BaseFalconSwerveConstants.PIGEON_ID);
         gyro.getConfigurator().apply(new Pigeon2Configuration());
-        gyro.setYaw(starting_yaw + (Variables.isBlueAlliance ? 0 : 180));
+        gyro.setYaw(STARTING_YAW + (Variables.isBlueAlliance ? 0 : 180));
 
         swerveModules = new SwerveModule[] {
-            new SwerveModule(0, Constants.BaseFalconSwerveConstants.Mod0.constants),
-            new SwerveModule(1, Constants.BaseFalconSwerveConstants.Mod1.constants),
-            new SwerveModule(2, Constants.BaseFalconSwerveConstants.Mod2.constants),
-            new SwerveModule(3, Constants.BaseFalconSwerveConstants.Mod3.constants)
+            new SwerveModule(0, Constants.BaseFalconSwerveConstants.Mod0.CONSTANTS),
+            new SwerveModule(1, Constants.BaseFalconSwerveConstants.Mod1.CONSTANTS),
+            new SwerveModule(2, Constants.BaseFalconSwerveConstants.Mod2.CONSTANTS),
+            new SwerveModule(3, Constants.BaseFalconSwerveConstants.Mod3.CONSTANTS)
         };
 
         Timer.delay(1.0);
         resetModulesToAbsolute(); // shouldn't be needed
 
-        poseEstimator = new SwerveDrivePoseEstimator(Constants.BaseFalconSwerveConstants.swerveKinematics, getGyroYaw(), getModulePositions(), new Pose2d());
+        poseEstimator = new SwerveDrivePoseEstimator(Constants.BaseFalconSwerveConstants.SWERVE_KINEMATICS, getGyroYaw(), getModulePositions(), new Pose2d());
         last_manual_time = Timer.getFPGATimestamp();
 
         fillCacheWithPose(poseEstimator.getEstimatedPosition());
@@ -101,11 +101,11 @@ public class Swerve extends SubsystemBase {
             this::driveRobotRelative, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
 
             new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
-                new PIDConstants(autonomous_translation_p_controller, 0.0, 0.0), // Translation PID constants
-                new PIDConstants(autonomous_angle_p_controller, 0.0, 0.0), // Rotation PID constants
-                kMaxSpeedMetersPerSecond, // Max module speed, in m/s
-                0.5 * Math.sqrt(Constants.BaseFalconSwerveConstants.wheelBase * Constants.BaseFalconSwerveConstants.wheelBase +   // Drive base radius in meters. 
-                                Constants.BaseFalconSwerveConstants.trackWidth * Constants.BaseFalconSwerveConstants.trackWidth), // Distance from robot center to furthest module.
+                new PIDConstants(AUTONOMOUS_TRANSLATION_P_CONTROLLER, 0.0, 0.0), // Translation PID constants
+                new PIDConstants(AUTONOMOUS_ANGLE_P_CONTROLLER, 0.0, 0.0), // Rotation PID constants
+                MAX_SPEED_METERS_PER_SECOND, // Max module speed, in m/s
+                0.5 * Math.sqrt(Constants.BaseFalconSwerveConstants.WHEEL_BASE * Constants.BaseFalconSwerveConstants.WHEEL_BASE +   // Drive base radius in meters. 
+                                Constants.BaseFalconSwerveConstants.TRACK_WIDTH * Constants.BaseFalconSwerveConstants.TRACK_WIDTH), // Distance from robot center to furthest module.
                 new ReplanningConfig() // Default path replanning config. See the API for the options here
             ),
             () -> {
@@ -186,7 +186,7 @@ public class Swerve extends SubsystemBase {
             new SwerveModuleState(0.05, new Rotation2d(-3.0 * Math.PI / 4))
         };
         
-        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.BaseFalconSwerveConstants.maxSpeed);
+        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.BaseFalconSwerveConstants.MAX_SPEED);
 
         for (SwerveModule mod : swerveModules) {
             mod.setDesiredState(swerveModuleStates[mod.moduleNumber], true);
@@ -202,7 +202,7 @@ public class Swerve extends SubsystemBase {
         double current_heading = getGyroYaw().getDegrees();
         
         if (rotation == 0) {
-            if (Timer.getFPGATimestamp() - last_manual_time < swerve_calibration_time) {
+            if (Timer.getFPGATimestamp() - last_manual_time < SWERVE_CALIBRATION_TIME) {
                 pie.resetTarget(current_heading);
             } else {
 
@@ -221,15 +221,15 @@ public class Swerve extends SubsystemBase {
             rotation *= (turn_slow_ratio - 1 + Variables.slowdown_factor) / turn_slow_ratio;
         }
 
-        if (translation.getNorm() < swerve_min_manual_translation * Constants.BaseFalconSwerveConstants.maxSpeed) translation = new Translation2d();
-        if (Math.abs(rotation) < swerve_min_manual_rotation * Constants.BaseFalconSwerveConstants.maxAngularVelocity) rotation = 0;
+        if (translation.getNorm() < SWERVE_MIN_MANUAL_TRANSLATION * Constants.BaseFalconSwerveConstants.MAX_SPEED) translation = new Translation2d();
+        if (Math.abs(rotation) < SWERVE_MIN_MANUAL_ROTATION * Constants.BaseFalconSwerveConstants.MAX_ANGULAR_VELOCITY) rotation = 0;
 
         if (Variables.invert_rotation) rotation *= -1;
 
         if (!Variables.isBlueAlliance) translation = translation.times(-1);
 
         SwerveModuleState[] swerveModuleStates =
-            Constants.BaseFalconSwerveConstants.swerveKinematics.toSwerveModuleStates(
+            Constants.BaseFalconSwerveConstants.SWERVE_KINEMATICS.toSwerveModuleStates(
                 fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
                                     translation.getX(), 
                                     translation.getY(), 
@@ -241,7 +241,7 @@ public class Swerve extends SubsystemBase {
                                     translation.getY(), 
                                     rotation)
                                 );
-        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.BaseFalconSwerveConstants.maxSpeed);
+        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.BaseFalconSwerveConstants.MAX_SPEED);
 
         for(SwerveModule mod : swerveModules) {
             mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
@@ -255,12 +255,12 @@ public class Swerve extends SubsystemBase {
 
     /** Used by PathPlanner */
     public ChassisSpeeds getRobotRelativeSpeeds() {
-        return Constants.BaseFalconSwerveConstants.swerveKinematics.toChassisSpeeds(getModuleStates());
+        return Constants.BaseFalconSwerveConstants.SWERVE_KINEMATICS.toChassisSpeeds(getModuleStates());
     }
 
     /* Used by SwerveControllerCommand in Auto */
     public void setModuleStates(SwerveModuleState[] desiredStates) {
-        SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, Constants.BaseFalconSwerveConstants.maxSpeed);
+        SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, Constants.BaseFalconSwerveConstants.MAX_SPEED);
         
         for (SwerveModule mod : swerveModules) {
             mod.setDesiredState(desiredStates[mod.moduleNumber], false);

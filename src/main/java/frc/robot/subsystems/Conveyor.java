@@ -10,22 +10,22 @@ public class Conveyor extends SubsystemBase {
     private EasyCANSparkMax conveyor_motor;
 
     public Conveyor() {
-        conveyor_motor = new EasyCANSparkMax(conveyor_motor_id, conveyor_motor_type, conveyor_motor_max_continuous_current, 
-            conveyor_motor_max_current, conveyor_motor_clockwise_positive, conveyor_motor_brake, conveyor_motor_max_percent_output_per_second);
+        conveyor_motor = new EasyCANSparkMax(CONVEYOR_MOTOR_ID, CONVEYOR_MOTOR_TYPE, CONVEYOR_MOTOR_MAX_CONTINOUS_CURRENT, 
+            CONVEYOR_MOTOR_MAX_CURRENT, CONVEYOR_MOTOR_CLOCKWISE_POSITIVE, CONVEYOR_MOTOR_BRAKE, CONVEYOR_MOTOR_MAX_PERSENT_OUTPUT_PER_SECOND);
     }
 
     public void intake() {
-        conveyor_motor.set(conveyor_intake_speed);
+        conveyor_motor.set(CONVEYOR_INTAKE_SPEED);
         log("Conveyor State", "Intaking");
     }
 
     public void outtake() {
-        conveyor_motor.set(conveyor_outtake_speed);
+        conveyor_motor.set(CONVEYOR_OUTTAKE_SPEED);
         log("Conveyor State", "Outtaking");
     }
 
     public void retract() {
-        conveyor_motor.set(conveyor_retract_speed);
+        conveyor_motor.set(CONVEYOR_RETRACT_SPEED);
         log("Conveyor State", "Retracting");
     }
 
@@ -39,7 +39,7 @@ public class Conveyor extends SubsystemBase {
     }
 
     public boolean isFree() {
-        return getCurrent() < conveyor_motor_free_current;
+        return getCurrent() < CONVEYOR_MOTOR_FREE_CURRENT;
     }
 
     @Override

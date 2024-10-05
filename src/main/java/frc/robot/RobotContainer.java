@@ -32,13 +32,13 @@ import static frc.robot.Constants.TeleopSwerveConstants.*;
  */
 public class RobotContainer {
     /* Controllers */
-    private final XboxController driver_XBox = new XboxController(driver_usb_port);
-    private final CommandXboxController operator = new CommandXboxController(operator_usb_port);
-    private final Joystick driver_TFlightHotasOne = new Joystick(joystick_usb_port);
+    private final XboxController driver_XBox = new XboxController(DRIVER_USB_PORT);
+    private final CommandXboxController operator = new CommandXboxController(OPERATOR_USB_PORT);
+    private final Joystick driver_TFlightHotasOne = new Joystick(JOYSTICK_USB_PORT);
 
     /* Driver Buttons */
-    private final Trigger zeroGyro = new JoystickButton(driver_XBox, XboxController.Button.kStart.value).or(new JoystickButton(driver_TFlightHotasOne, joystickZeroGyroButton));
-    // private final Trigger makeX = new JoystickButton(driver_XBox, xBoxMakeXButton).or(new JoystickButton(driver_TFlightHotasOne, joystickMakeXButton));
+    private final Trigger zeroGyro = new JoystickButton(driver_XBox, XboxController.Button.kStart.value).or(new JoystickButton(driver_TFlightHotasOne, JOYSTICK_ZERO_GYRO_BUTTON));
+    // private final Trigger makeX = new JoystickButton(driver_XBox, XBOX_MAKE_X_BUTTON).or(new JoystickButton(driver_TFlightHotasOne, JOYSTICK_MAKE_X_BUTTON));
 
     private final Trigger robotCentric = new JoystickButton(driver_XBox, XboxController.Button.kY.value);
 
@@ -55,36 +55,36 @@ public class RobotContainer {
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
 
-        if (tFlightHotasOne_drive) {
+        if (T_FLIGHT_HOT_AS_ONE_DRIVE) {
             swerve.setDefaultCommand(
                 new TeleopSwerveRelativeDirecting(
                     swerve, 
-                    () -> -driver_TFlightHotasOne.getRawAxis(joystickTranslationAxis)-driver_XBox.getRawAxis(xBoxTranslationAxis), 
-                    () -> -driver_TFlightHotasOne.getRawAxis(joystickStrafeAxis)-driver_XBox.getRawAxis(xBoxStrafeAxis), 
-                    () -> -driver_TFlightHotasOne.getRawAxis(joystickRotationAxis)-driver_XBox.getRawAxis(xBoxRotationAxis), 
+                    () -> -driver_TFlightHotasOne.getRawAxis(JOYSTICK_TRANSLATION_AXIS)-driver_XBox.getRawAxis(XBOX_TRANSLATION_AXIS), 
+                    () -> -driver_TFlightHotasOne.getRawAxis(JOYSTICK_STRAFE_AXIS)-driver_XBox.getRawAxis(XBOX_STRAFE_AXIS), 
+                    () -> -driver_TFlightHotasOne.getRawAxis(JOYSTICK_ROTATION_AXIS)-driver_XBox.getRawAxis(XBOX_ROTATION_AXIS), 
                     () -> false, 
                     () -> -driver_TFlightHotasOne.getPOV()-driver_XBox.getPOV() + 1, 
                     () -> {
-                        if (driver_TFlightHotasOne.getRawButton(joystickSlowButton)) {
-                            return teleop_swerve_slow_factor; // also sets direct angle I guess?
+                        if (driver_TFlightHotasOne.getRawButton(JOYSTICK_SLOW_BUTTON)) {
+                            return TELEOP_SWERVE_SLOW_FACTOR; // also sets direct angle I guess?
                         } else {
                             return 1 - 0.75 * driver_XBox.getRawAxis(XboxController.Axis.kLeftTrigger.value);
                         }
                     }, // what we multiply translation speed by; rotation speed is NOT affected
-                    () -> (Variables.bypass_rotation || driver_TFlightHotasOne.getRawButton(joystickDirectAngleButton) || driver_XBox.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.2)
+                    () -> (Variables.bypass_rotation || driver_TFlightHotasOne.getRawButton(JOYSTICK_DIRECT_ANGLE_BUTTON) || driver_XBox.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.2)
                 )
             );
-        } else if (fancy_drive) {
+        } else if (FANCY_DRIVE) {
             swerve.setDefaultCommand(
                 new TeleopSwerveAbsoluteDirecting(
                     swerve, 
-                    () -> -driver_XBox.getRawAxis(xBoxTranslationAxis), 
-                    () -> -driver_XBox.getRawAxis(xBoxStrafeAxis), 
-                    () -> driver_XBox.getRawAxis(xBoxDirectionXAxis), 
-                    () -> -driver_XBox.getRawAxis(xBoxDirectionYAxis), 
+                    () -> -driver_XBox.getRawAxis(XBOX_TRANSLATION_AXIS), 
+                    () -> -driver_XBox.getRawAxis(XBOX_STRAFE_AXIS), 
+                    () -> driver_XBox.getRawAxis(XBOX_DIRECTION_X_AXIS), 
+                    () -> -driver_XBox.getRawAxis(XBOX_DIRECTION_Y_AXIS), 
                     () -> -driver_XBox.getPOV(), 
                     () -> (driver_XBox.getRawButton(XboxController.Button.kRightBumper.value) ? 0.2 : 0) - (driver_XBox.getRawButton(XboxController.Button.kLeftBumper.value) ? 0.2 : 0), 
-                    () -> (driver_XBox.getRawButton(xBoxSlowButtonOne) || driver_XBox.getRawButton(xBoxSlowButtonTwo)), 
+                    () -> (driver_XBox.getRawButton(XBOX_SLOW_BUTTON_ONE) || driver_XBox.getRawButton(XBOX_SLOW_BUTTON_TWO)), 
                     () -> (Variables.bypass_rotation || driver_XBox.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.2)
                 )
             );
@@ -92,9 +92,9 @@ public class RobotContainer {
             swerve.setDefaultCommand(
                 new TeleopSwerveRelativeDirecting(
                     swerve, 
-                    () -> -driver_XBox.getRawAxis(xBoxTranslationAxis), 
-                    () -> -driver_XBox.getRawAxis(xBoxStrafeAxis), 
-                    () -> -driver_XBox.getRawAxis(xBoxRotationAxis), 
+                    () -> -driver_XBox.getRawAxis(XBOX_TRANSLATION_AXIS), 
+                    () -> -driver_XBox.getRawAxis(XBOX_STRAFE_AXIS), 
+                    () -> -driver_XBox.getRawAxis(XBOX_ROTATION_AXIS), 
                     () -> false, 
                     () -> -driver_XBox.getPOV(), 
                     () -> 1 - 0.75 * driver_XBox.getRawAxis(XboxController.Axis.kLeftTrigger.value), // what we multiply translation speed by; rotation speed is NOT affected
@@ -142,14 +142,14 @@ public class RobotContainer {
         
         // makeX.onTrue(new InstantCommand(() -> swerve.makeX())); button conflict :(
 
-        // new JoystickButton(driver_TFlightHotasOne, joystickDriveToAmpButton).toggleOnTrue(TargetDriveCommands.driveToAmp(swerve));
+        // new JoystickButton(driver_TFlightHotasOne, JOYSTICK_DRIVE_TO_AMP_BUTTON).toggleOnTrue(TargetDriveCommands.driveToAmp(swerve));
 
         /* Operator Triggers */
         operator.a().whileTrue(Commands.startEnd(flywheel::outtake, flywheel::stop, flywheel));
         operator.y().whileTrue(Commands.startEnd(flywheel::amp, flywheel::stop, flywheel));
         operator.b().toggleOnTrue(new RetractConveyor(conveyor)); // also ends all other commands requiring flywheel
 
-        operator.x().toggleOnTrue(new SetArmPosition(pivot, starting_angle));
+        operator.x().toggleOnTrue(new SetArmPosition(pivot, STARTING_ANGLE));
         operator.start().toggleOnTrue(new ResetHangCommand(hang));
 
         // shooting
@@ -160,7 +160,7 @@ public class RobotContainer {
         operator.leftBumper().toggleOnTrue(new IntakeCommand(pivot, intake, conveyor).handleInterrupt(() -> new RetractConveyor(conveyor).schedule()));
         operator.rightBumper().toggleOnTrue(new SequentialCommandGroup(
                 new ParallelRaceGroup(
-                    new WaitCommand(max_flywheel_acceleration_time), 
+                    new WaitCommand(MAX_FLYWHEEL_ACCELERATION_TIME), 
                     Commands.waitUntil(flywheel::isAtSpeed)
                 ),
                 new InstantCommand(conveyor::outtake, conveyor), 

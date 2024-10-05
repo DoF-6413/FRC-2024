@@ -12,7 +12,7 @@ public class RetractConveyor extends SequentialCommandGroup {
 
         addCommands(
             new InstantCommand(() -> conveyor.retract()), 
-            new WaitCommand(retract_conveyor_time).handleInterrupt(() -> conveyor.stop()), 
+            new WaitCommand(RETRACT_CONVEYOR_TIME).handleInterrupt(() -> conveyor.stop()), 
             new InstantCommand(() -> conveyor.stop())
         );
     }

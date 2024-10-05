@@ -22,77 +22,77 @@ public final class Constants {
 
         /* For these, align all the wheels so their gears are facing toward RSL Side */
 
-        public static final double CANCoder0_zero = -47.81, // Front Left
-                                   CANCoder1_zero = -47.15, // Front Right
-                                   CANCoder2_zero = -128.5, // Back Left
-                                   CANCoder3_zero = -88; // Back Right
+        public static final double CANCODER_0_ZERO = -47.81, // Front Left
+                                   CANCODER_1_ZERO = -47.15, // Front Right
+                                   CANCODER_2_ZERO = -128.5, // Back Left
+                                   CANCODER_3_ZERO = -88; // Back Right
         
-        public static final boolean useCANCoders = true;
+        public static final boolean USE_CANCODERS = true;
         
         /* Swerve Drive Constants */
 
-        public static final double drive_motor_p = 0.05,
-                                   drive_static_voltage = 0.32, 
-                                   drive_equilibrium_voltage = 1.51, 
-                                   drive_acceleration_voltage = 0.27, // SYSID values: KS, KV, KA; they are automatically divided by 12 later
-                                   max_linear_speed = 10, // feet per second; theoretical max is 13.5
-                                   max_angular_speed = 360; // degrees per second; theoretical max is theoretical maximum is max_linear_speed * 46.6436741705 which is roughly 629.6896013018
+        public static final double DRIVE_MOTOR_P = 0.05,
+                                   DRIVE_STATIC_VOLTAGE = 0.32, 
+                                   DRIVE_EQUILIBRIUM_VOLTAGE = 1.51, 
+                                   DRIVE_ACCELERATION_VOLTAGE = 0.27, // SYSID values: KS, KV, KA; they are automatically divided by 12 later
+                                   MAX_LINEAR_SPEED = 10, // feet per second; theoretical max is 13.5
+                                   MAX_ANGULAR_SPEED = 360; // degrees per second; theoretical max is theoretical maximum is MAX_LINEAR_SPEED * 46.6436741705 which is roughly 629.6896013018
 
         /* PathPlanner PID Constants */
 
-        public static final double autonomous_max_linear_speed = 10,
-                                   autonomous_ramp_up_time_linear = 0.75, // in seconds to reach max 
-                                   autonomous_max_angular_speed = 400, 
-                                   autonomous_ramp_up_time_angular = 0.66,
-                                   autonomous_translation_p_controller = 2, 
-                                   autonomous_angle_p_controller = 4;
+        public static final double AUTONOMOUS_MAX_LINEAR_SPEED = 10,
+                                   AUTONOMOUS_RAMP_IP_TIME_LINEAR = 0.75, // in seconds to reach max 
+                                   AUTONOMOUS_MAX_ANGULAR_SPEED = 400, 
+                                   AUTONOMOUS_RAMP_UP_TIME_ANGULAR = 0.66,
+                                   AUTONOMOUS_TRANSLATION_P_CONTROLLER = 2, 
+                                   AUTONOMOUS_ANGLE_P_CONTROLLER = 4;
         
         /* Driving PID Constants */
 
-        public static final double teleop_angle_p = 0.165,
-                                   teleop_angle_i = 0,
-                                   teleop_angle_e = 1.35,
-                                   teleop_translation_p = 0.4, 
-                                   teleop_translation_i = 0,
-                                   teleop_translation_tolerance = 1;
+        public static final double TELEOP_ANGLE_P = 0.165,
+                                   TELEOP_ANGLE_I = 0,
+                                   TELEOP_ANGLE_E = 1.35,
+                                   TELEOP_TRANSLATION_P = 0.4, 
+                                   TELEOP_TRANSLATION_I = 0,
+                                   TELEOP_TRANSLATION_TOLERANCE = 1;
         
         public static final double turn_slow_ratio = 1; // because slowing down rotation and translation by the same factor is insane
                                     // ex. it its 4, then 0.6 translation ratio goes to a 0.9 turning ratio
         
         /* Pivot Constants */
 
-        public static final double pivot_p = .015, 
-                                   pivot_i = 0, 
-                                   pivot_g = 0.018, 
-                                   pivot_e = 1.05, 
-                                   pivot_zero = 115;
+        public static final double PIVOT_P = .015, 
+                                   PIVOT_I = 0, 
+                                   PIVOT_G = 0.018, 
+                                   PIVOT_E = 1.05, 
+                                   PIVOT_ZERO = 115;
         
-        public static final double starting_angle = -9.255644, // thanks to certain people, it's not -9.255644, // all in degrees
-                                   intake_angle = 59.006106, 
-                                   amp_angle = 125.388397, 
+        public static final double STARTING_ANGLE = -9.255644, // thanks to certain people, it's not -9.255644, // all in degrees
+                                   INTAKE_ANGLE = 59.006106, 
+                                   AMP_ANGLE = 125.388397, 
 
-                                   min_outtake_angle = 25, 
-                                   pivot_guard_angle = 0; // so we dont smack against the walls. goal is to get this to 0 soon
+                                   MIN_OUTTAKE_ANGLE = 25, 
+                                   PIVOT_GUARD_ANGLE = 0; // so we dont smack against the walls. goal is to get this to 0 soon
         
         /* Hang Constants */
         
-        public static final double hang_p = 0.0, // temporarily disabled
-                                   hang_i = 0.0, 
-                                   hang_e = 1.0;
+        public static final double HANG_P = 0.0, // temporarily disabled
+                                   HANG_I = 0.0, 
+                                   HANG_E = 1.0;
         
         /* Intaking Constants */
 
-        public static final double acceleration_time = 1, 
-                                   min_intake_time = 8, 
-                                   add_intake_time = 0.8, 
-                                   add_conveyor_time = 0.2, 
-                                   retract_conveyor_time = 0.15; // how much we intake after the note has passed through
+        public static final double ACCELERATION_TIME = 1, 
+                                   MIN_INTAKE_TIME = 8, 
+                                   ADD_INTAKE_TIME = 0.8, 
+                                   ADD_CONVEYOR_TIME = 0.2, 
+                                   RETRACT_CONVEYOR_TIME = 0.15; // how much we intake after the note has passed through
         
         /* Outtaking Constants */
 
-        public static final double max_flywheel_acceleration_time = 4, 
-                                   min_outtake_time = 1, 
-                                   min_amp_time = 2;
+        public static final double MAX_FLYWHEEL_ACCELERATION_TIME = 4, 
+                                   MIN_OUTTAKE_TIME = 1, 
+                                   MIN_AMP_TIME = 2;
 
     }
 
@@ -100,73 +100,73 @@ public final class Constants {
 
         /* D-pad */
 
-        public static final int dpad_up = 0, 
-                                dpad_right = 90, 
-                                dpad_down = 180, 
-                                dpad_left = 270;
+        public static final int DPAD_UP = 0, 
+                                DPAD_RIGHT = 90, 
+                                DPAD_DOWN = 180, 
+                                DPAD_LEFT = 270;
 
         /* Which is which */
 
-        public static final int joystick_usb_port = 0, 
-                                driver_usb_port = 2, 
-                                operator_usb_port = 1;
+        public static final int JOYSTICK_USB_PORT = 0, 
+                                DRIVER_USB_PORT = 2, 
+                                OPERATOR_USB_PORT = 1;
 
         /* Driver Buttons */
 
-        public static final int xBoxTranslationAxis = XboxController.Axis.kLeftY.value, 
-                                xBoxStrafeAxis = XboxController.Axis.kLeftX.value,
+        public static final int XBOX_TRANSLATION_AXIS = XboxController.Axis.kLeftY.value, 
+                                XBOX_STRAFE_AXIS = XboxController.Axis.kLeftX.value,
 
-                                xBoxRotationAxis = XboxController.Axis.kRightX.value,
+                                XBOX_ROTATION_AXIS = XboxController.Axis.kRightX.value,
 
-                                xBoxDirectionXAxis = XboxController.Axis.kRightX.value, 
-                                xBoxDirectionYAxis = XboxController.Axis.kRightY.value, 
-                                xBoxTurnRightAxis = XboxController.Axis.kRightTrigger.value, 
-                                xBoxTurnLeftAxis = XboxController.Axis.kLeftTrigger.value, 
+                                XBOX_DIRECTION_X_AXIS = XboxController.Axis.kRightX.value, 
+                                XBOX_DIRECTION_Y_AXIS = XboxController.Axis.kRightY.value, 
+                                XBOX_TURN_RIGHT_AXIS = XboxController.Axis.kRightTrigger.value, 
+                                XBOX_TURN_LEFT_AXIS = XboxController.Axis.kLeftTrigger.value, 
                                 
-                                xBoxSlowAxis = XboxController.Axis.kRightTrigger.value, 
-                                xBoxSlowButtonOne = XboxController.Button.kRightBumper.value, 
-                                xBoxSlowButtonTwo = XboxController.Button.kLeftBumper.value, 
+                                XBOX_SLOW_AXIS = XboxController.Axis.kRightTrigger.value, 
+                                XBOX_SLOW_BUTTON_ONE = XboxController.Button.kRightBumper.value, 
+                                XBOX_SLOW_BUTTON_TWO = XboxController.Button.kLeftBumper.value, 
 
-                                xBoxRobotCentricButton = XboxController.Button.kLeftBumper.value,
+                                XBOX_ROBOT_CENTRIC_BUTTON = XboxController.Button.kLeftBumper.value,
 
-                                xBoxZeroGyroButton = XboxController.Button.kY.value, 
-                                xBoxMakeXButton = XboxController.Button.kX.value, 
-                                xBoxTerminateCommandsDriverButton = XboxController.Button.kBack.value,
+                                xBOX_ZERO_GYRO_BUTTON = XboxController.Button.kY.value, 
+                                XBOX_MAKE_X_BUTTON = XboxController.Button.kX.value, 
+                                XBOX_TERMINATE_COMMANDS_dRIVER_BUTTON = XboxController.Button.kBack.value,
 
-                                joystickTranslationAxis = 1, 
-                                joystickStrafeAxis = 0, 
+                                JOYSTICK_TRANSLATION_AXIS = 1, 
+                                JOYSTICK_STRAFE_AXIS = 0, 
 
-                                joystickRotationAxis = 5, 
+                                JOYSTICK_ROTATION_AXIS = 5, 
 
-                                joystickSlowButton = 1,
+                                JOYSTICK_SLOW_BUTTON = 1,
 
-                                joystickDirectAngleButton = 2, 
+                                JOYSTICK_DIRECT_ANGLE_BUTTON = 2, 
 
-                                joystickZeroGyroButton = 4, 
-                                joystickMakeXButton = 2, 
-                                joystickDriveToAmpButton = 4; // if we push the slider forward it cancels commands
+                                JOYSTICK_ZERO_GYRO_BUTTON = 4, 
+                                JOYSTICK_MAKE_X_BUTTON = 2, 
+                                JOYSTICK_DRIVE_TO_AMP_BUTTON = 4; // if we push the slider forward it cancels commands
                                 // .getPOV() is the same for joystick; joystick is a T.Flight Hotas One
 
         /* Operator Buttons */
-        public static final int terminateCommandsOperatorButton = XboxController.Button.kBack.value;
+        public static final int TERMINATE_COMMANDS_OPERATOR_BUTTON = XboxController.Button.kBack.value;
         
     }
 
     public static final class GeneralConstants {
 
-        public static final boolean fancy_drive = true, 
-                                    tFlightHotasOne_drive = true;
+        public static final boolean FANCY_DRIVE = true, 
+                                    T_FLIGHT_HOT_AS_ONE_DRIVE = true;
         
-        public static final double joystick_deadzone = 0.2,
-                                   axis_exponent = 1.3;
+        public static final double JOYSTICK_DEADZONE = 0.2,
+                                   AXIS_EXPONENT = 1.3;
         
-        public static final double starting_yaw = 0; // shoot this might depend based on autonomous... we can make a new command xoxo
+        public static final double STARTING_YAW = 0; // shoot this might depend based on autonomous... we can make a new command xoxo
         
         public static final double signedPower(double axis_value) {
-            axis_value = MathUtil.applyDeadband(axis_value, joystick_deadzone);
+            axis_value = MathUtil.applyDeadband(axis_value, JOYSTICK_DEADZONE);
             if (axis_value == 0) return 0;
-            if (axis_value < 0) return 0 - Math.pow(0 - axis_value, axis_exponent);
-            return Math.pow(axis_value, axis_exponent);
+            if (axis_value < 0) return 0 - Math.pow(0 - axis_value, AXIS_EXPONENT);
+            return Math.pow(axis_value, AXIS_EXPONENT);
         }
         
         /** Normalizes angle to between -180 and 180 */
@@ -224,172 +224,172 @@ public final class Constants {
     }
 
     public static final class BaseFalconSwerveConstants {
-        public static final int pigeonID = 0;
+        public static final int PIGEON_ID = 0;
 
-        public static final COTSTalonFXSwerveConstants chosenModule = COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L1);
+        public static final COTSTalonFXSwerveConstants CHOSEN_MODULE = COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L1);
 
         /* Drivetrain Constants */
-        public static final double trackWidth = Units.inchesToMeters(22.75); // 28" width -> 22.75" track width
-        public static final double wheelBase = Units.inchesToMeters(18.75); // 24" drivetrain length -> 18.75" wheel base
-        public static final double wheelCircumference = chosenModule.wheelCircumference;
+        public static final double TRACK_WIDTH = Units.inchesToMeters(22.75); // 28" width -> 22.75" track width
+        public static final double WHEEL_BASE = Units.inchesToMeters(18.75); // 24" drivetrain length -> 18.75" wheel base
+        public static final double WHEEL_CIRCUMFERENCE = CHOSEN_MODULE.WHEEL_CIRCUMFERENCE;
 
         /* Swerve Kinematics 
          * No need to ever change this unless you are not doing a traditional rectangular/square 4 module swerve */
-         public static final SwerveDriveKinematics swerveKinematics = new SwerveDriveKinematics(
-            new Translation2d(wheelBase / 2.0, trackWidth / 2.0),
-            new Translation2d(wheelBase / 2.0, -trackWidth / 2.0),
-            new Translation2d(-wheelBase / 2.0, trackWidth / 2.0),
-            new Translation2d(-wheelBase / 2.0, -trackWidth / 2.0));
+         public static final SwerveDriveKinematics SWERVE_KINEMATICS = new SwerveDriveKinematics(
+            new Translation2d(WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0),
+            new Translation2d(WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0),
+            new Translation2d(-WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0),
+            new Translation2d(-WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0));
 
         /* Module Gear Ratios */
-        public static final double driveGearRatio = chosenModule.driveGearRatio;
-        public static final double angleGearRatio = chosenModule.angleGearRatio;
+        public static final double DRIVE_GEAR_RATIO = CHOSEN_MODULE.DRIVE_GEAR_RATIO;
+        public static final double ANGLE_GEAR_RATIO = CHOSEN_MODULE.ANGLE_GEAR_RATIO;
 
         /* Motor Inverts */
-        public static final InvertedValue angleMotorInvert = chosenModule.angleMotorInvert;
-        public static final InvertedValue driveMotorInvert = chosenModule.driveMotorInvert;
+        public static final InvertedValue ANGLE_MOTOR_INVERT = CHOSEN_MODULE.ANGLE_MOTOR_INVERT;
+        public static final InvertedValue DRIVE_MOTOR_INVERT = CHOSEN_MODULE.DRIVE_MOTOR_INVERT;
 
         /* Angle Encoder Invert */
-        public static final SensorDirectionValue cancoderInvert = chosenModule.cancoderInvert;
+        public static final SensorDirectionValue CANCODER_INVERT = CHOSEN_MODULE.CANCODER_INVERT;
 
         /* Swerve Current Limiting */
-        public static final int angleCurrentLimit = 30;
-        public static final int angleCurrentThreshold = 35;
-        public static final double angleCurrentThresholdTime = 0.1;
-        public static final boolean angleEnableCurrentLimit = true;
+        public static final int ANGLE_CURRENT_LIMIT = 30;
+        public static final int ANGLE_CURRENT_THRESHOLD = 35;
+        public static final double ANGLE_CURRENT_THRESHOLD_TIME = 0.1;
+        public static final boolean ANGLE_ENABLE_CURRENT_LIMIT = true;
 
-        public static final int driveCurrentLimit = 30;
-        public static final int driveCurrentThreshold = 35;
-        public static final double driveCurrentThresholdTime = 0.1;
-        public static final boolean driveEnableCurrentLimit = true;
+        public static final int DRIVE_CURRENT_LIMIT = 30;
+        public static final int DRIVE_CURRENT_THRESHOLD = 35;
+        public static final double DRIVE_CURRENT_THRESHOLD_TIME = 0.1;
+        public static final boolean DRIVE_ENABLE_CURRENT_LIMIT = true;
 
         /* These values are used by the drive falcon to ramp in open loop and closed loop driving.
          * We found a small open loop ramp (0.25) helps with tread wear, tipping, etc */
-        public static final double openLoopRamp = 0.25;
-        public static final double closedLoopRamp = 0.0;
+        public static final double OPEN_LOOP_RAMP = 0.25;
+        public static final double CLOSED_LOOP_RAMP = 0.0;
 
         /* Angle Motor PID Values */
-        public static final double angleKP = chosenModule.angleKP;
-        public static final double angleKI = chosenModule.angleKI;
-        public static final double angleKD = chosenModule.angleKD;
+        public static final double ANGLE_KP = CHOSEN_MODULE.ANGLE_KP;
+        public static final double ANGLE_KI = CHOSEN_MODULE.ANGLE_KI;
+        public static final double ANGLE_KD = CHOSEN_MODULE.ANGLE_KD;
 
         /* Drive Motor PID Values */
-        public static final double driveKP = TuningConstants.drive_motor_p; 
-        public static final double driveKI = 0.0;
-        public static final double driveKD = 0.0;
-        public static final double driveKF = 0.0;
+        public static final double DRIVE_KP = TuningConstants.DRIVE_MOTOR_P; 
+        public static final double DRIVE_KI = 0.0;
+        public static final double DRIVE_KD = 0.0;
+        public static final double DRIVE_KF = 0.0;
 
         /* Drive Motor Characterization Values From SYSID */
-        public static final double driveKS = (TuningConstants.drive_static_voltage / 12.0);
-        public static final double driveKV = (TuningConstants.drive_equilibrium_voltage / 12.0);
-        public static final double driveKA = (TuningConstants.drive_acceleration_voltage / 12.0);
+        public static final double DRIVE_KS = (TuningConstants.DRIVE_STATIC_VOLTAGE / 12.0);
+        public static final double DRIVE_KV = (TuningConstants.DRIVE_EQUILIBRIUM_VOLTAGE / 12.0);
+        public static final double DRIVE_KA = (TuningConstants.DRIVE_ACCELERATION_VOLTAGE / 12.0);
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static final double maxSpeed = TuningConstants.max_linear_speed * 0.3048;
+        public static final double MAX_SPEED = TuningConstants.MAX_LINEAR_SPEED * 0.3048;
         /** Radians per Second */
-        public static final double maxAngularVelocity = TuningConstants.max_angular_speed * Math.PI / 180.0;
+        public static final double MAX_ANGULAR_VELOCITY = TuningConstants.MAX_ANGULAR_SPEED * Math.PI / 180.0;
 
         /* Neutral Modes */
-        public static final NeutralModeValue angleNeutralMode = NeutralModeValue.Coast;
-        public static final NeutralModeValue driveNeutralMode = NeutralModeValue.Brake;
+        public static final NeutralModeValue ANGLE_NEUTRAL_MODE = NeutralModeValue.Coast;
+        public static final NeutralModeValue DRIVE_NEUTRAL_MODE = NeutralModeValue.Brake;
 
         /* Module Specific Constants */
         /* Front Left Module - Module 0 */
         public static final class Mod0 {
-            public static final int driveMotorID = 1;
-            public static final int angleMotorID = 2;
-            public static final int canCoderID = 3;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(TuningConstants.CANCoder0_zero + 90);
-            public static final SwerveModuleConstants constants = 
-                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
+            public static final int DRIVE_MOTOR_ID = 1;
+            public static final int ANGLE_MOTOR_ID = 2;
+            public static final int CANCODER_ID = 3;
+            public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(TuningConstants.CANCODER_0_ZERO + 90);
+            public static final SwerveModuleConstants CONSTANTS = 
+                new SwerveModuleConstants(DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CANCODER_ID, ANGLE_OFFSET);
         }
 
         /* Front Right Module - Module 1 */
         public static final class Mod1 {
-            public static final int driveMotorID = 4;
-            public static final int angleMotorID = 5;
-            public static final int canCoderID = 6;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(TuningConstants.CANCoder1_zero + 90);
-            public static final SwerveModuleConstants constants = 
-                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
+            public static final int DRIVE_MOTOR_ID = 4;
+            public static final int ANGLE_MOTOR_ID = 5;
+            public static final int CANCODER_ID = 6;
+            public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(TuningConstants.CANCODER_1_ZERO + 90);
+            public static final SwerveModuleConstants CONSTANTS = 
+                new SwerveModuleConstants(DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CANCODER_ID, ANGLE_OFFSET);
         }
         
         /* Back Left Module - Module 2 */
         public static final class Mod2 {
-            public static final int driveMotorID = 7;
-            public static final int angleMotorID = 8;
-            public static final int canCoderID = 9;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(TuningConstants.CANCoder2_zero + 90);
-            public static final SwerveModuleConstants constants = 
-                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
+            public static final int DRIVE_MOTOR_ID = 7;
+            public static final int ANGLE_MOTOR_ID = 8;
+            public static final int CANCODER_ID = 9;
+            public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(TuningConstants.CANCODER_2_ZERO + 90);
+            public static final SwerveModuleConstants CONSTANTS = 
+                new SwerveModuleConstants(DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CANCODER_ID, ANGLE_OFFSET);
         }
 
         /* Back Right Module - Module 3 */
         public static final class Mod3 {
-            public static final int driveMotorID = 11; // bc they were messed up from the can id thing
-            public static final int angleMotorID = 10;
-            public static final int canCoderID = 12;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(TuningConstants.CANCoder3_zero + 90);
-            public static final SwerveModuleConstants constants = 
-                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
+            public static final int DRIVE_MOTOR_ID = 11; // bc they were messed up from the can id thing
+            public static final int ANGLE_MOTOR_ID = 10;
+            public static final int CANCODER_ID = 12;
+            public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(TuningConstants.CANCODER_3_ZERO + 90);
+            public static final SwerveModuleConstants CONSTANTS = 
+                new SwerveModuleConstants(DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CANCODER_ID, ANGLE_OFFSET);
         }
     }
 
     public static final class AutoConstants {
-        public static final double kMaxSpeedMetersPerSecond = TuningConstants.autonomous_max_linear_speed * 0.3048;
-        public static final double kMaxAccelerationMetersPerSecondSquared = TuningConstants.autonomous_max_linear_speed * 0.3048 / TuningConstants.autonomous_ramp_up_time_linear;
-        public static final double kMaxAngularSpeedRadiansPerSecond = TuningConstants.autonomous_max_angular_speed * Math.PI / 180.0;
-        public static final double kMaxAngularSpeedRadiansPerSecondSquared = TuningConstants.autonomous_max_angular_speed * Math.PI / 180.0 / TuningConstants.autonomous_ramp_up_time_angular;
+        public static final double MAX_SPEED_METERS_PER_SECOND = TuningConstants.AUTONOMOUS_MAX_LINEAR_SPEED * 0.3048;
+        public static final double MAX_ACCELERATION_METERS_PER_SECOND = TuningConstants.AUTONOMOUS_MAX_LINEAR_SPEED * 0.3048 / TuningConstants.AUTONOMOUS_RAMP_IP_TIME_LINEAR;
+        public static final double MAX_ANGULAR_SPEED_RADIANTS_PER_SECOND = TuningConstants.AUTONOMOUS_MAX_ANGULAR_SPEED * Math.PI / 180.0;
+        public static final double MAX_ANGULAR_SPEED_RADIANTS_PER_SECOND_SQUARED = TuningConstants.AUTONOMOUS_MAX_ANGULAR_SPEED * Math.PI / 180.0 / TuningConstants.AUTONOMOUS_RAMP_UP_TIME_ANGULAR;
     
-        public static final double kPXController = TuningConstants.autonomous_translation_p_controller;
-        public static final double kPYController = TuningConstants.autonomous_translation_p_controller;
-        public static final double kPThetaController = TuningConstants.autonomous_angle_p_controller;
+        public static final double KP_X_CONTROLLER = TuningConstants.AUTONOMOUS_TRANSLATION_P_CONTROLLER;
+        public static final double KP_Y_CONTROLLER = TuningConstants.AUTONOMOUS_TRANSLATION_P_CONTROLLER;
+        public static final double KP_THETHA_CONTROLLER = TuningConstants.AUTONOMOUS_ANGLE_P_CONTROLLER;
     
         /* Constraint for the motion profilied robot angle controller */
-        public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
-                kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
+        public static final TrapezoidProfile.Constraints THETHA_CONTROLLER_CONSTRAINTS = new TrapezoidProfile.Constraints(
+                MAX_ANGULAR_SPEED_RADIANTS_PER_SECOND, MAX_ANGULAR_SPEED_RADIANTS_PER_SECOND_SQUARED);
     }
 
     public static final class TeleopSwerveConstants {
-        public static final double swerve_min_pid_rotation = 0.05,
-                                   swerve_max_pid_rotation = 0.8, 
-                                   swerve_calibration_time = 0.5, 
-                                   swerve_min_manual_translation = 0.05, 
-                                   swerve_min_manual_rotation = 0.02,
+        public static final double SWERVE_MIN_PID_ROTATION = 0.05,
+                                   SWERVE_MAX_PID_ROTATION = 0.8, 
+                                   SWERVE_CALIBRATION_TIME = 0.5, 
+                                   SWERVE_MIN_MANUAL_TRANSLATION = 0.05, 
+                                   SWERVE_MIN_MANUAL_ROTATION = 0.02,
 
-                                   teleop_swerve_slow_factor = 0.2, 
+                                   TELEOP_SWERVE_SLOW_FACTOR = 0.2, 
                                    
-                                   vision_tolerance = 5, 
+                                   VISION_TOLERANCE = 5, 
                                    
-                                   teleop_rotation_percent = 0.75, 
-                                   swerve_bumper_turn_sensitivity = 0.35; // ratio of teleop swerve rotation speed vs maximum swerve rotation speed
+                                   TELEOP_ROTATIO_PERCENT = 0.75, 
+                                   SWERVE_BUMPER_TURN_SENSIVILITY = 0.35; // ratio of teleop swerve rotation speed vs maximum swerve rotation speed
     }
     
     public static final class IntakeConstants {
 
         /* CAN IDs */
 
-        public static final int intake_motor_id = 20; // Neo
+        public static final int INTAKE_MOTOR_ID = 20; // Neo
         
         /* Motor Parameters */
 
-        public static final MotorType intake_motor_type = MotorType.kBrushless;
+        public static final MotorType INTAKE_MOTOR_TYPE = MotorType.kBrushless;
         
-        public static final boolean intake_motor_clockwise_positive = true, 
-                                    intake_motor_brake = true;
+        public static final boolean INTAKE_MOTOR_CLOCKWISE_POSITIVE = true, 
+                                    INTAKE_MOTOR_BRAKE = true;
         
-        public static final int intake_motor_max_continuous_current = 15;
+        public static final int INTAKE_MOTOR_MAX_CONTINUOS_CURRENT = 15;
 
-        public static final double intake_motor_max_current = 25, 
+        public static final double INTAKE_MOTOR_MAX_CURRENT = 25, 
 
-                                   intake_motor_max_percent_output_per_second = 3, 
+                                   INTAKE_MOTOR_MAX_PERCENT_OUTPUT_PER_SECOND = 3, 
 
-                                   intake_motor_free_current = 11;
+                                   INTAKE_MOTOR_FREE_CURRENT = 11;
 
         /* Subsystem Variables */
 
-        public static final double intake_motor_speed = 1.0;
+        public static final double INTAKE_MOTOR_SPEED = 1.0;
         
     }
 
@@ -397,29 +397,29 @@ public final class Constants {
 
         /* CAN IDs */
 
-        public static final int conveyor_motor_id = 19; // Neo
+        public static final int CONVEYOR_MOTOR_ID = 19; // Neo
         
         /* Motor Parameters */
         
-        public static final MotorType conveyor_motor_type = MotorType.kBrushless;
+        public static final MotorType CONVEYOR_MOTOR_TYPE = MotorType.kBrushless;
 
-        public static final boolean conveyor_motor_clockwise_positive = true, 
-                                    conveyor_motor_brake = true;
+        public static final boolean CONVEYOR_MOTOR_CLOCKWISE_POSITIVE = true, 
+                                    CONVEYOR_MOTOR_BRAKE = true;
         
-        public static final int conveyor_motor_max_continuous_current = 10;
+        public static final int CONVEYOR_MOTOR_MAX_CONTINOUS_CURRENT = 10;
 
-        public static final double conveyor_motor_max_current = 15, 
+        public static final double CONVEYOR_MOTOR_MAX_CURRENT = 15, 
                                            
-                                   conveyor_motor_max_percent_output_per_second = 3,
+                                   CONVEYOR_MOTOR_MAX_PERSENT_OUTPUT_PER_SECOND = 3,
 
-                                   conveyor_motor_free_current = 5;
+                                   CONVEYOR_MOTOR_FREE_CURRENT = 5;
 
         /* Subsystem Variables */
 
-        public static final double conveyor_intake_speed = 0.7, 
-                                   conveyor_retract_speed = -0.5, 
-                                   conveyor_outtake_speed = 0.8, 
-                                   conveyor_amp_speed = 0.8;
+        public static final double CONVEYOR_INTAKE_SPEED = 0.7, 
+                                   CONVEYOR_RETRACT_SPEED = -0.5, 
+                                   CONVEYOR_OUTTAKE_SPEED = 0.8, 
+                                   CONVEYOR_AMP_SPEED = 0.8;
 
     }
 
@@ -427,31 +427,31 @@ public final class Constants {
 
         /* CAN IDs */
 
-        public static final int pivot_motor_ID = 13; // Kraken
+        public static final int PIVOT_MOTOR_ID = 13; // Kraken
 
         /* Motor Parameters */
 
-        public static final boolean pivot_motor_clockwise_positive = false, 
-                                    pivot_motor_brake = false, 
-                                    pivot_motor_invert_sensor = false;
+        public static final boolean PIVOT_MOTOR_CLOCKWISE_POSITIVE = false, 
+                                    PIVOT_MOTOR_BRAKE = false, 
+                                    PIVOT_MOTOR_INVERT_SENSOR = false;
                 
-        public static final double pivot_motor_max_continuous_current = 15, 
-                                   pivot_motor_max_current = 25, 
+        public static final double PIVOT_MOTOR_MAX_CONTINOUS_CURRENT = 15, 
+                                   PIVOT_MOTOR_MAX_CURRENT = 25, 
 
-                                   pivot_motor_min_percent_output = 0, 
-                                   pivot_motor_max_percent_output = 0.95, 
+                                   PIVOT_MOTOR_MIN_PERCENT_OUTPUT = 0, 
+                                   PIVOT_MOTOR_MAX_PERCENT_OUTPUT = 0.95, 
                                    
-                                   pivot_motor_max_percent_output_per_second = 10, 
+                                   PIVOT_MOTOR_MIN_PERCENT_OUTPUT_PER_SECOND = 10, 
                                    
-                                   pivot_motor_gear_ratio = (5.0 / 1.0) * (9.0 / 1.0) * (34.0 / 10.0), 
+                                   PIVOT_MOTOR_GEAR_RATIO = (5.0 / 1.0) * (9.0 / 1.0) * (34.0 / 10.0), 
                                    
-                                   pivot_motor_calibration_time = 0.2, 
+                                   PIVOT_MOTOR_CALIBRATION_TIME = 0.2, 
 
-                                   pivot_motor_free_current = 10;
+                                   PIVOT_MOTOR_FREE_CURRENT = 10;
 
         /* Subsystem Variables */
 
-        public static final double pivot_angle_tolerance = 1.5;
+        public static final double PIVOT_ANGLE_TOLERANCE = 1.5;
 
     }
 
@@ -459,36 +459,36 @@ public final class Constants {
 
         /* CAN IDs */
 
-        public static final int top_flywheel_motor_ID = 17, 
-                                bottom_flywheel_motor_ID = 16; // Falcon 500
+        public static final int TOP_FLYWHEEEL_MOTOR_ID = 17, 
+                                BOTTOM_FLYWHEEL_MOTOR_ID = 16; // Falcon 500
 
         /* Motor Parameters */
 
-        public static final boolean flywheel_motors_clockwise_positive = false, 
-                                    flywheel_motors_brake = false, 
-                                    flywheel_motors_invert_sensor = false;
+        public static final boolean FLYWHEEL_MOTORS_CLOCKWISE_POSITIVE = false, 
+                                    FLYWHEEL_MOTORS_BRAKE = false, 
+                                    FLYWHEEL_MOTORS_INVERT_SENSOR = false;
                 
-        public static final double flywheel_motors_max_continuous_current = 15,
-                                   flywheel_motors_max_current = 25, 
+        public static final double FLYWHEEL_MOTORS_MAX_CONTINUOUS_CURRENT = 15,
+                                   FLYWHEEL_MOTORS_MAX_CURRENT = 25, 
 
-                                   flywheel_motors_min_percent_output = 0.02, 
-                                   flywheel_motors_max_percent_output = 0.95, 
+                                   FLYWHEEL_MOTORS_MIN_PERCENT_OUTPUT = 0.02, 
+                                   FLYWHEEL_MOTORS_MAX_PERCENT_OUTPUT = 0.95, 
                                    
-                                   flywheel_motors_max_percent_output_per_second = 3, 
+                                   FLYWHEEL_MOTORS_MIN_PERCENT_OUTPUT_PER_SECOND = 3, 
                                    
-                                   flywheel_motors_gear_ratio = 1.0, 
+                                   FLYWHEEL_MOTORS_GEAR_RATIO = 1.0, 
                                    
-                                   flywheel_motors_calibration_time = 0.25,
+                                   FLYWHEEL_MOTORS_CALIBRATION_TIME = 0.25,
 
-                                   flywheel_motors_free_current = 10;
+                                   FLYWHEEL_MOTORS_FREE_CURRENT = 10;
 
         /* Subsystem Variables */
 
-        public static final boolean flywheel_motors_opposite = false; // they should turn in the same direction
+        public static final boolean FLYWHEEL_MOTORS_OPPOSITE = false; // they should turn in the same direction
 
-        public static final double flywheel_shooting_rpm = 4500, 
-                                   flywheel_amp_rpm = 800,
-                                   flywheel_intake_rpm = -400;
+        public static final double FLYWHEEL_SHOOTING_RPM = 4500, 
+                                   FLYWHEEL_AMP_RPM = 800,
+                                   FLYWHEEL_INTAKE_RPM = -400;
 
     }
 
@@ -496,34 +496,34 @@ public final class Constants {
 
         /* CAN IDs */
 
-        public static final int left_hang_motor_ID = 14,
-                                right_hang_motor_ID = 15; // Falcon 500
+        public static final int LEFT_HANG_MOTOR_ID = 14,
+                                RIGHT_HANG_MOTOR_ID = 15; // Falcon 500
 
         /* Motor Parameters */
 
-        public static final boolean hang_motors_clockwise_positive = false, // Literally does not matter
-                                    hang_motors_brake = true, 
-                                    hang_motors_invert_sensor = false;
+        public static final boolean HANG_MOTORS_CLOCKWISE_POSITIVE = false, // Literally does not matter
+                                    HANG_MOTORS_BRAKE = true, 
+                                    HANG_MOTORS_INVERT_SENSOR = false;
                 
-        public static final double hang_motors_max_continuous_current = 15,
-                                   hang_motors_max_current = 25, 
+        public static final double HANG_MOTORS_MAX_CONTINOUS_CURRENT = 15,
+                                   HANG_MOTORS_MAX_CURRENT = 25, 
 
-                                   hang_motors_min_percent_output = 0.02, 
-                                   hang_motors_max_percent_output = 0.95, 
+                                   HANG_MOTORS_MIN_PERCENT_OUTPUT = 0.02, 
+                                   HANG_MOTORS_MAX_PERCENT_OUTPUT = 0.95, 
                                    
-                                   hang_motors_max_percent_output_per_second = 3, 
+                                   HANG_MOTORS_MIN_PERCENT_OUTPUT_PER_SECOND = 3, 
                                    
-                                   hang_motors_gear_ratio = 25.0, // doesn't really matter because its a linear relationship
+                                   HANG_MOTORS_GEAR_RATIO = 25.0, // doesn't really matter because its a linear relationship
                                    
-                                   hang_motors_calibration_time = 0.25, 
+                                   HANG_MOTORS_CALIBRATION_TIME = 0.25, 
                                    
-                                   hang_motors_free_current = 8;
+                                   HANG_MOTORS_FREE_CURRENT = 8;
 
         /* Subsystem Variables */
         
-        public static final boolean hang_motors_opposite = false; // they should turn in opposite directions
+        public static final boolean HANG_MOTORS_OPPOSITE = false; // they should turn in opposite directions
 
-        public static final double hanging_position = 1800;
+        public static final double HANGING_POSITION = 1800;
 
     }
 
