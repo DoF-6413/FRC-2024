@@ -21,8 +21,8 @@ public class EasyCANSparkMax {
         
         motor.setIdleMode(brake ? IdleMode.kBrake : IdleMode.kCoast);
 
-        motor.setOPEN_LOOP_RAMPRate(1.0 / max_percent_output_per_second);
-        motor.setCLOSED_LOOP_RAMPRate(1.0 / max_percent_output_per_second);
+        motor.setOpenLoopRampRate(1.0 / max_percent_output_per_second);
+        motor.setClosedLoopRampRate(1.0 / max_percent_output_per_second);
 
         motor.setSmartCurrentLimit((int) Math.round(continuousCurrentLimit));
         motor.setSecondaryCurrentLimit(peakCurrentLimit);
