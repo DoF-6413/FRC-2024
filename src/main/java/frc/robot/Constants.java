@@ -13,7 +13,6 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.lib.util.COTSTalonFXSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
@@ -301,13 +300,12 @@ public final class Constants {
     public static final class BaseFalconSwerveConstants {
         public static final int PIGEON_ID = 0;
 
-        public static final COTSTalonFXSwerveConstants CHOSEN_MODULE = COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L1);
 
         /* Drivetrain Constants */
         public static final double TRACK_WIDTH = Units.inchesToMeters(22.75); // 28" width -> 22.75" track width
         public static final double WHEEL_BASE = Units.inchesToMeters(18.75); // 24" drivetrain length -> 18.75" wheel base
-        public static final double WHEEL_CIRCUMFERENCE = CHOSEN_MODULE.WHEEL_CIRCUMFERENCE;
-
+        public static final double WHEEL_DIAMETER = Units.inchesToMeters(3.78);
+        public static final double WHEEL_CIRCUMFERENCE = WHEEL_DIAMETER * Math.PI;
         /* Swerve Kinematics 
          * No need to ever change this unless you are not doing a traditional rectangular/square 4 module swerve */
          public static final SwerveDriveKinematics SWERVE_KINEMATICS = new SwerveDriveKinematics(
@@ -317,15 +315,15 @@ public final class Constants {
             new Translation2d(-WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0));
 
         /* Module Gear Ratios */
-        public static final double DRIVE_GEAR_RATIO = CHOSEN_MODULE.DRIVE_GEAR_RATIO;
-        public static final double ANGLE_GEAR_RATIO = CHOSEN_MODULE.ANGLE_GEAR_RATIO;
+        public static final double DRIVE_GEAR_RATIO = (8.14 / 1.0);
+        public static final double ANGLE_GEAR_RATIO = ((150.0 / 7.0) / 1.0);  // (150 / 7) : 1 
 
         /* Motor Inverts */
-        public static final InvertedValue ANGLE_MOTOR_INVERT = CHOSEN_MODULE.ANGLE_MOTOR_INVERT;
-        public static final InvertedValue DRIVE_MOTOR_INVERT = CHOSEN_MODULE.DRIVE_MOTOR_INVERT;
+        public static final InvertedValue ANGLE_MOTOR_INVERT = InvertedValue.Clockwise_Positive;
+        public static final InvertedValue DRIVE_MOTOR_INVERT = InvertedValue.CounterClockwise_Positive;
 
         /* Angle Encoder Invert */
-        public static final SensorDirectionValue CANCODER_INVERT = CHOSEN_MODULE.CANCODER_INVERT;
+        public static final SensorDirectionValue CANCODER_INVERT = SensorDirectionValue.CounterClockwise_Positive;
 
         /* Swerve Current Limiting */
         public static final int ANGLE_CURRENT_LIMIT = 30;
@@ -344,9 +342,9 @@ public final class Constants {
         public static final double CLOSED_LOOP_RAMP = 0.0;
 
         /* Angle Motor PID Values */
-        public static final double ANGLE_KP = CHOSEN_MODULE.ANGLE_KP;
-        public static final double ANGLE_KI = CHOSEN_MODULE.ANGLE_KI;
-        public static final double ANGLE_KD = CHOSEN_MODULE.ANGLE_KD;
+        public static final double ANGLE_KP = 100.0;
+        public static final double ANGLE_KI = 0.0;
+        public static final double ANGLE_KD = 0.0;
 
         /* Drive Motor PID Values */
         public static final double DRIVE_KP = TuningConstants.DRIVE_MOTOR_P; 
