@@ -20,8 +20,8 @@ public class TargetDriveCommands {
           AutoBuilder.pathfindToPose(
               targetPose, 
               new PathConstraints(
-                kMaxSpeedMetersPerSecond, kMaxAccelerationMetersPerSecondSquared,  
-                kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared
+                MAX_SPEED_METERS_PER_SECOND, MAX_ACCELERATION_METERS_PER_SECOND,  
+                MAX_ANGULAR_SPEED_RADIANTS_PER_SECOND, MAX_ANGULAR_SPEED_RADIANTS_PER_SECOND_SQUARED
               ), 
               0, 
               0

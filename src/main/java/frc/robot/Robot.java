@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -80,7 +81,7 @@ public class Robot extends TimedRobot {
             Variables.isBlueAlliance = true;
 
         // Make sure we are using the proper Limelight pipeline
-        Limelight.setPipeline(Variables.isBlueAlliance);
+        Limelight.setPipline(Variables.isBlueAlliance);
 
         log("TeleOp Time Left", 200);
 
@@ -109,7 +110,7 @@ public class Robot extends TimedRobot {
             Variables.isBlueAlliance = true;
 
         // Make sure we are using the proper Limelight pipeline
-        Limelight.setPipeline(Variables.isBlueAlliance);
+        Limelight.setPipline(Variables.isBlueAlliance);
 
         end_time = Timer.getFPGATimestamp() + 135;
 
@@ -161,6 +162,6 @@ public class Robot extends TimedRobot {
             Variables.isBlueAlliance = true;
 
         // Make sure we are using the proper Limelight pipeline
-        Limelight.setPipeline(Variables.isBlueAlliance);
+        Limelight.setPipline(Variables.isBlueAlliance);
     }
 }

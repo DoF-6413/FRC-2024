@@ -32,15 +32,15 @@ public class Intake_Subcommand extends Command {
         conveyor.intake();
 
         starting_time = Timer.getFPGATimestamp();
-        finish_time = Timer.getFPGATimestamp() + min_intake_time;
+        finish_time = Timer.getFPGATimestamp() + MIN_INTAKE_TIME;
 
         already_reset = false;
     }
 
     @Override
     public void execute() {
-        if (!intake.isFree() && Timer.getFPGATimestamp() > starting_time + acceleration_time && !already_reset) {
-            finish_time = Timer.getFPGATimestamp() + add_intake_time;
+        if (!intake.isFree() && Timer.getFPGATimestamp() > starting_time + ACCELERATION_TIME && !already_reset) {
+            finish_time = Timer.getFPGATimestamp() + ADD_INTAKE_TIME;
             already_reset = true;
         }
     }

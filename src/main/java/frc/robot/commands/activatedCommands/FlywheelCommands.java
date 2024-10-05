@@ -15,7 +15,7 @@ public class FlywheelCommands {
         return new SequentialCommandGroup(
             new InstantCommand(() -> flywheel.outtake(), flywheel), 
             new ParallelRaceGroup(
-                new WaitCommand(max_flywheel_acceleration_time), 
+                new WaitCommand(MAX_FLYWHEEL_ACCELERATION_TIME), 
                 Commands.waitUntil(flywheel::isAtSpeed)
             )
         );
@@ -25,7 +25,7 @@ public class FlywheelCommands {
         return new SequentialCommandGroup(
             new InstantCommand(() -> flywheel.amp(), flywheel), 
             new ParallelRaceGroup(
-                new WaitCommand(max_flywheel_acceleration_time), 
+                new WaitCommand(MAX_FLYWHEEL_ACCELERATION_TIME), 
                 Commands.waitUntil(flywheel::isAtSpeed)
             )
         );

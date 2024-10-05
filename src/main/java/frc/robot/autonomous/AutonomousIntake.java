@@ -14,7 +14,7 @@ public class AutonomousIntake extends SequentialCommandGroup {
         addRequirements(pivot, intake, conveyor);
 
         addCommands(
-            new SetArmPosition(pivot, intake_angle), 
+            new SetArmPosition(pivot, INTAKE_ANGLE), 
             new ParallelDeadlineGroup( // could also be ParallelRaceGroup
                 new SequentialCommandGroup(
                     new Intake_Subcommand(intake, conveyor, true), // ParallelDeadlineGroup???

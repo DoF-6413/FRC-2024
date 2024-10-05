@@ -45,16 +45,16 @@ public class TeleopSwerveAbsoluteDirecting extends Command {
         /* Get Values, Deadband*/
         double translationVal = signedPower(translationSup.getAsDouble());
         double strafeVal = signedPower(strafeSup.getAsDouble());
-        double turnVal = signedPower(turnSup.getAsDouble()) * swerve_bumper_turn_sensitivity;
+        double turnVal = signedPower(turnSup.getAsDouble()) * SWERVE_BUMPER_TURN_SENSIVILITY;
 
         double slowVal = 1;
 
-        if (slowSup.getAsBoolean()) slowVal = teleop_swerve_slow_factor;
+        if (slowSup.getAsBoolean()) slowVal = TELEOP_SWERVE_SLOW_FACTOR;
         
         double x_dir = directionXSup.getAsDouble();
         double y_dir = directionYSup.getAsDouble();
 
-        if (x_dir * x_dir + y_dir * y_dir < joystick_deadzone * joystick_deadzone) {
+        if (x_dir * x_dir + y_dir * y_dir < JOYSTICK_DEADZONE * JOYSTICK_DEADZONE) {
             x_dir = 0;
             y_dir = 0;
         }
@@ -74,7 +74,7 @@ public class TeleopSwerveAbsoluteDirecting extends Command {
                 } else {
                     target_heading = Math.atan(y_dir / x_dir) * 180.0 / Math.PI - 90;
                 }
-                turnVal = getPECorrection(normalizeAngle(target_heading + (Variables.isBlueAlliance ? 0 : 180) - swerve.getGyroYaw().getDegrees()), teleop_angle_p, teleop_angle_e, swerve_min_pid_rotation * Constants.BaseFalconSwerveConstants.maxAngularVelocity, swerve_max_pid_rotation * Constants.BaseFalconSwerveConstants.maxAngularVelocity);
+                turnVal = getPECorrection(normalizeAngle(target_heading + (Variables.isBlueAlliance ? 0 : 180) - swerve.getGyroYaw().getDegrees()), TELEOP_ANGLE_P, TELEOP_ANGLE_E, SWERVE_MIN_PID_ROTATION * Constants.BaseFalconSwerveConstants.MAX_ANGULAR_VELOCITY, SWERVE_MAX_PID_ROTATION * Constants.BaseFalconSwerveConstants.MAX_ANGULAR_VELOCITY);
 
             } else if (targetSup.getAsInt() % 90 == 0) { // setTargetHeading on purpose
                 swerve.setTargetHeading(targetSup.getAsInt() + (Variables.isBlueAlliance ? 0 : 180));
@@ -88,8 +88,8 @@ public class TeleopSwerveAbsoluteDirecting extends Command {
 
         /* Drive */
         swerve.drive(
-            new Translation2d(translationVal, strafeVal).times(Constants.BaseFalconSwerveConstants.maxSpeed).times(slowVal), 
-            turnVal * Constants.BaseFalconSwerveConstants.maxAngularVelocity, 
+            new Translation2d(translationVal, strafeVal).times(Constants.BaseFalconSwerveConstants.MAX_SPEED).times(slowVal), 
+            turnVal * Constants.BaseFalconSwerveConstants.MAX_ANGULAR_VELOCITY, 
             true, 
             true
         );

@@ -13,7 +13,7 @@ import frc.robot.subsystems.*;
 public class ShootingCommands {
 
     public static Command amp(Pivot pivot) {
-        return new SetArmPosition(pivot, amp_angle - pivot_guard_angle);
+        return new SetArmPosition(pivot, AMP_ANGLE - PIVOT_GUARD_ANGLE);
     }
 
     public static Command autonomousSpeaker(Swerve swerve, Pivot pivot, Flywheel flywheel, Conveyor conveyor) {

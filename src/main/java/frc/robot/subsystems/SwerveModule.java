@@ -1,6 +1,6 @@
 package frc.robot.subsystems;
 
-import static frc.robot.Constants.TuningConstants.useCANCoders;
+import static frc.robot.Constants.TuningConstants.USE_CANCODERS;
 
 import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.PositionVoltage;
@@ -27,7 +27,7 @@ public class SwerveModule {
     private TalonFX mDriveMotor;
     private CANcoder angleEncoder;
 
-    private final SimpleMotorFeedforward driveFeedForward = new SimpleMotorFeedforward(Constants.BaseFalconSwerveConstants.driveKS, Constants.BaseFalconSwerveConstants.driveKV, Constants.BaseFalconSwerveConstants.driveKA);
+    private final SimpleMotorFeedforward driveFeedForward = new SimpleMotorFeedforward(Constants.BaseFalconSwerveConstants.DRIVE_KS, Constants.BaseFalconSwerveConstants.DRIVE_KV, Constants.BaseFalconSwerveConstants.DRIVE_KA);
 
     /* drive motor control requests */
     private final DutyCycleOut driveDutyCycle = new DutyCycleOut(0);
@@ -69,10 +69,10 @@ public class SwerveModule {
 
     private void setSpeed(SwerveModuleState desiredState, boolean isOpenLoop) {
         if (isOpenLoop) {
-            driveDutyCycle.Output = desiredState.speedMetersPerSecond / Constants.BaseFalconSwerveConstants.maxSpeed;
+            driveDutyCycle.Output = desiredState.speedMetersPerSecond / Constants.BaseFalconSwerveConstants.MAX_SPEED;
             mDriveMotor.setControl(driveDutyCycle);
         } else {
-            driveVelocity.Velocity = Conversions.MPSToRPS(desiredState.speedMetersPerSecond, Constants.BaseFalconSwerveConstants.wheelCircumference);
+            driveVelocity.Velocity = Conversions.MPSToRPS(desiredState.speedMetersPerSecond, Constants.BaseFalconSwerveConstants.WHEEL_CIRCUMFERENCE);
             driveVelocity.FeedForward = driveFeedForward.calculate(desiredState.speedMetersPerSecond);
             mDriveMotor.setControl(driveVelocity);
         }
@@ -84,26 +84,26 @@ public class SwerveModule {
 
     public void resetToAbsolute() {
         double absolutePosition = getCANcoder().getRotations() - angleOffset.getRotations();
-        mAngleMotor.setPosition(useCANCoders ? absolutePosition : -0.25);
+        mAngleMotor.setPosition(USE_CANCODERS ? absolutePosition : -0.25);
     }
 
     public SwerveModuleState getState() {
         return new SwerveModuleState(
-            Conversions.RPSToMPS(mDriveMotor.getVelocity().getValue(), Constants.BaseFalconSwerveConstants.wheelCircumference), 
+            Conversions.RPSToMPS(mDriveMotor.getVelocity().getValue(), Constants.BaseFalconSwerveConstants.WHEEL_CIRCUMFERENCE), 
             Rotation2d.fromRotations(mAngleMotor.getPosition().getValue())
         );
     }
 
     public SwerveModuleState getCanState() {
         return new SwerveModuleState(
-            Conversions.RPSToMPS(mDriveMotor.getVelocity().getValue(), Constants.BaseFalconSwerveConstants.wheelCircumference), 
+            Conversions.RPSToMPS(mDriveMotor.getVelocity().getValue(), Constants.BaseFalconSwerveConstants.WHEEL_CIRCUMFERENCE), 
             Rotation2d.fromRotations(getCANcoder().getRotations() - angleOffset.getRotations())
         );
     }
 
     public SwerveModulePosition getPosition() {
         return new SwerveModulePosition(
-            Conversions.rotationsToMeters(mDriveMotor.getPosition().getValue(), Constants.BaseFalconSwerveConstants.wheelCircumference), 
+            Conversions.rotationsToMeters(mDriveMotor.getPosition().getValue(), Constants.BaseFalconSwerveConstants.WHEEL_CIRCUMFERENCE), 
             Rotation2d.fromRotations(mAngleMotor.getPosition().getValue())
         );
     }

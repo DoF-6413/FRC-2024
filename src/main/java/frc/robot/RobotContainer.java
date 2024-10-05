@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.*;
 import frc.robot.autonomous.*;
@@ -27,8 +29,8 @@ import static frc.robot.Constants.TeleopSwerveConstants.*;
  */
 public class RobotContainer {
     /* Controllers */
-    private final XboxController driver_XBox = new XboxController(driver_usb_port);
-    private final CommandXboxController operator = new CommandXboxController(operator_usb_port);
+    private final XboxController driver_XBox = new XboxController(DRIVER_USB_PORT);
+    private final CommandXboxController operator = new CommandXboxController(OPERATOR_USB_PORT);
 
     /* Driver Buttons */
     private final Trigger zeroGyro = new JoystickButton(driver_XBox, XboxController.Button.kStart.value);
@@ -49,13 +51,13 @@ public class RobotContainer {
 
     public RobotContainer() {
 
-        if (relative_drive) {
+        if (RELATIVE_DRIVE) {
             swerve.setDefaultCommand(
                 new TeleopSwerveRelativeDirecting(
                     swerve, 
-                    () -> -driver_XBox.getRawAxis(xBoxTranslationAxis), 
-                    () -> -driver_XBox.getRawAxis(xBoxStrafeAxis), 
-                    () -> -driver_XBox.getRawAxis(xBoxRotationAxis), 
+                    () -> -driver_XBox.getRawAxis(XBOX_TRANSLATION_AXIS), 
+                    () -> -driver_XBox.getRawAxis(XBOX_STRAFE_AXIS), 
+                    () -> -driver_XBox.getRawAxis(XBOX_ROTATION_AXIS), 
                     () -> false, 
                     () -> -driver_XBox.getPOV() + 1, 
                     () -> 1 - 0.75 * driver_XBox.getRawAxis(XboxController.Axis.kLeftTrigger.value), // what we multiply translation speed by; rotation speed is NOT affected
@@ -66,14 +68,14 @@ public class RobotContainer {
             swerve.setDefaultCommand(
                 new TeleopSwerveAbsoluteDirecting(
                     swerve, 
-                    () -> -driver_XBox.getRawAxis(xBoxTranslationAxis), 
-                    () -> -driver_XBox.getRawAxis(xBoxStrafeAxis), 
-                    () -> driver_XBox.getRawAxis(xBoxDirectionXAxis), 
-                    () -> -driver_XBox.getRawAxis(xBoxDirectionYAxis), 
+                    () -> -driver_XBox.getRawAxis(XBOX_TRANSLATION_AXIS), 
+                    () -> -driver_XBox.getRawAxis(XBOX_STRAFE_AXIS), 
+                    () -> driver_XBox.getRawAxis(XBOX_DIRECTION_X_AXIS), 
+                    () -> -driver_XBox.getRawAxis(XBOX_DIRECTION_Y_AXIS), 
                     () -> -driver_XBox.getPOV(), 
                     () -> (driver_XBox.getRawButton(XboxController.Button.kRightBumper.value) ? 0.2 : 0) -
                           (driver_XBox.getRawButton(XboxController.Button.kLeftBumper.value) ? 0.2 : 0), 
-                    () -> (driver_XBox.getRawButton(xBoxSlowButtonOne) || driver_XBox.getRawButton(xBoxSlowButtonTwo)), 
+                    () -> (driver_XBox.getRawButton(XBOX_SLOW_BUTTON_ONE) || driver_XBox.getRawButton(XBOX_SLOW_BUTTON_TWO)), 
                     () -> (Variables.bypass_rotation || driver_XBox.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.2)
                 )
             );
@@ -121,7 +123,7 @@ public class RobotContainer {
         operator.a().whileTrue(Commands.startEnd(flywheel::outtake, flywheel::stop, flywheel));
         operator.y().whileTrue(Commands.startEnd(flywheel::amp, flywheel::stop, flywheel));
         operator.b().toggleOnTrue(new RetractConveyor(conveyor)); // also ends all other commands requiring flywheel
-        operator.x().toggleOnTrue(new SetArmPosition(pivot, starting_angle));
+        operator.x().toggleOnTrue(new SetArmPosition(pivot, STARTING_ANGLE));
         operator.start().toggleOnTrue(new ResetHangCommand(hang));
 
         // shooting
@@ -135,7 +137,7 @@ public class RobotContainer {
         operator.leftBumper().toggleOnTrue(new IntakeCommand(pivot, intake, conveyor).handleInterrupt(() -> new RetractConveyor(conveyor).schedule()));
         operator.rightBumper().toggleOnTrue(new SequentialCommandGroup(
                 new ParallelRaceGroup(
-                    new WaitCommand(max_flywheel_acceleration_time), 
+                    new WaitCommand(MAX_FLYWHEEL_ACCELERATION_TIME), 
                     Commands.waitUntil(flywheel::isAtSpeed)
                 ),
                 new InstantCommand(conveyor::outtake, conveyor), 

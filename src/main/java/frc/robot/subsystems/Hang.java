@@ -14,16 +14,16 @@ public class Hang extends SubsystemBase {
 
     public Hang() {
 
-        left_hang_motor = new PIETalon(left_hang_motor_ID, hang_motors_max_continuous_current, hang_motors_max_current, 
-            hang_motors_brake, hang_motors_clockwise_positive, 0, -hanging_position, 0, hang_motors_min_percent_output, 
-            hang_motors_max_percent_output, hang_motors_max_percent_output_per_second, hang_motors_gear_ratio, 
-            hang_motors_invert_sensor, hang_motors_calibration_time, hang_p, hang_i, hang_e
+        left_hang_motor = new PIETalon(LEFT_HANG_MOTOR_ID, HANG_MOTORS_MAX_CONTINOUS_CURRENT, HANG_MOTORS_MAX_CURRENT, 
+            HANG_MOTORS_BRAKE, HANG_MOTORS_CLOCKWISE_POSITIVE, 0, -HANGING_POSITION, 0, HANG_MOTORS_MIN_PERCENT_OUTPUT, 
+            HANG_MOTORS_MAX_PERCENT_OUTPUT, HANG_MOTORS_MIN_PERCENT_OUTPUT_PER_SECOND, HANG_MOTORS_GEAR_RATIO, 
+            HANG_MOTORS_INVERT_SENSOR, HANG_MOTORS_CALIBRATION_TIME, HANG_P, HANG_I, HANG_E
         );
         
-        right_hang_motor = new PIETalon(right_hang_motor_ID, hang_motors_max_continuous_current, hang_motors_max_current, 
-            hang_motors_brake, hang_motors_clockwise_positive ^ hang_motors_opposite, 0, -hanging_position, 0, hang_motors_min_percent_output, 
-            hang_motors_max_percent_output, hang_motors_max_percent_output_per_second, hang_motors_gear_ratio, 
-            hang_motors_invert_sensor, hang_motors_calibration_time, hang_p, hang_i, hang_e
+        right_hang_motor = new PIETalon(RIGHT_HANG_MOTOR_ID, HANG_MOTORS_MAX_CONTINOUS_CURRENT, HANG_MOTORS_MAX_CURRENT, 
+            HANG_MOTORS_BRAKE, HANG_MOTORS_CLOCKWISE_POSITIVE ^ HANG_MOTORS_OPPOSITE, 0, -HANGING_POSITION, 0, HANG_MOTORS_MIN_PERCENT_OUTPUT, 
+            HANG_MOTORS_MAX_PERCENT_OUTPUT, HANG_MOTORS_MIN_PERCENT_OUTPUT_PER_SECOND, HANG_MOTORS_GEAR_RATIO, 
+            HANG_MOTORS_INVERT_SENSOR, HANG_MOTORS_CALIBRATION_TIME, HANG_P, HANG_I, HANG_E
         ); // invert and opposite: TT -> F, TF -> T, FT -> T, FF -> F; ^ is XOR
 
         left_hang_motor.disableLimiting();
@@ -101,12 +101,12 @@ public class Hang extends SubsystemBase {
     }
 
     public void enableLimiting() {
-        left_hang_motor.enableLimiting(-hanging_position, 0);
-        right_hang_motor.enableLimiting(-hanging_position, 0);
+        left_hang_motor.enableLimiting(-HANGING_POSITION, 0);
+        right_hang_motor.enableLimiting(-HANGING_POSITION, 0);
     }
 
     public boolean isFree() {
-        return left_hang_motor.getCurrent() + right_hang_motor.getCurrent() < 2 * hang_motors_free_current;
+        return left_hang_motor.getCurrent() + right_hang_motor.getCurrent() < 2 * HANG_MOTORS_FREE_CURRENT;
     }
 
     @Override

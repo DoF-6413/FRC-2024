@@ -40,7 +40,7 @@ public class AutonomousCommands {
       Commands.run(intake::intake, intake),
       Commands.run(conveyor::intake, conveyor),
       Commands.run(flywheel::intake, flywheel),
-      new SetArmPosition(pivot, TuningConstants.intake_angle).andThen(Commands.run(pivot::pidPower, pivot))
+      new SetArmPosition(pivot, TuningConstants.INTAKE_ANGLE).andThen(Commands.run(pivot::pidPower, pivot))
     );
   }
 
@@ -71,7 +71,7 @@ public class AutonomousCommands {
   }
 
   static Command pivotUnderStage(Pivot pivot) {
-    return new SetArmPosition(pivot, TuningConstants.starting_angle).andThen(pivot::pidPower, pivot);
+    return new SetArmPosition(pivot, TuningConstants.STARTING_ANGLE).andThen(pivot::pidPower, pivot);
   }
 
   public static Command shoot(Swerve swerve, Conveyor conveyor, Pivot pivot, Flywheel flywheel) {

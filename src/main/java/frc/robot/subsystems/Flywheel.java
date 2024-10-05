@@ -32,8 +32,8 @@ public class Flywheel extends SubsystemBase {
 
     public Flywheel() {
 
-        top = new TalonFX(top_flywheel_motor_ID);
-        bottom = new TalonFX(bottom_flywheel_motor_ID);
+        top = new TalonFX(TOP_FLYWHEEEL_MOTOR_ID);
+        bottom = new TalonFX(BOTTOM_FLYWHEEL_MOTOR_ID);
 
         TalonFXConfiguration config = new TalonFXConfiguration();
         config.CurrentLimits.SupplyCurrentLimitEnable = true;
@@ -64,12 +64,12 @@ public class Flywheel extends SubsystemBase {
     }
 
     public void outtake() {
-        targetRPS = flywheel_shooting_rpm / 60;
+        targetRPS = FLYWHEEL_SHOOTING_RPM / 60;
         log("Flywheel State", "Outtaking");
     }
 
     public void amp() {
-        targetRPS = flywheel_amp_rpm / 60;
+        targetRPS = FLYWHEEL_AMP_RPM / 60;
         log("Flywheel State", "Amping");
     }
 
@@ -85,7 +85,7 @@ public class Flywheel extends SubsystemBase {
 
     // add backpressure while intaking to make sure we dont send the note too far forwards
     public void intake() {
-      targetRPS = flywheel_intake_rpm / 60;
+      targetRPS = FLYWHEEL_INTAKE_RPM / 60;
       log("Flywheel State", "Intaking");
     }
 
@@ -94,11 +94,11 @@ public class Flywheel extends SubsystemBase {
     }
 
     public boolean isFree() {
-        return getAverageCurrent() < flywheel_motors_free_current;
+        return getAverageCurrent() < FLYWHEEL_MOTORS_FREE_CURRENT;
     }
 
     public boolean isAtSpeed() {
-        double tolerance = Math.sqrt(flywheel_shooting_rpm / 60) * 0.4;
+        double tolerance = Math.sqrt(FLYWHEEL_SHOOTING_RPM / 60) * 0.4;
         double topError = Math.abs(targetRPS - topRPS.getAsDouble());
         double bottomError = Math.abs(targetRPS - bottomRPS.getAsDouble());
 

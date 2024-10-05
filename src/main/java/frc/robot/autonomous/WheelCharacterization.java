@@ -21,7 +21,7 @@ public class WheelCharacterization extends CommandBase {
   private double[] startWheelAngles = new double[4];
 
   // meters
-  private double driveRadius = Math.hypot(BaseFalconSwerveConstants.trackWidth / 2, BaseFalconSwerveConstants.wheelBase / 2);
+  private double driveRadius = Math.hypot(BaseFalconSwerveConstants.TRACK_WIDTH / 2, BaseFalconSwerveConstants.WHEEL_BASE / 2);
 
   // meters
   double currentEffectiveWheelRadius = 0.0;
