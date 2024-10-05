@@ -11,15 +11,6 @@ public class Autonomous {
     static String selectedAuto = "Center C3 C2 F1 C1";
     static Command auto = null;
     static boolean lastIsBlueAlliance = Variables.isBlueAlliance;
-    public static void disabledPeriodic() {
-        String newSelectedAuto = SmartDashboard.getString("Auto Selector String", "Center C3 C2 F1 C1");
-
-        if (!selectedAuto.equals(newSelectedAuto) || lastIsBlueAlliance != Variables.isBlueAlliance) {
-            auto = new PathPlannerAuto(newSelectedAuto);
-            selectedAuto = newSelectedAuto;
-            lastIsBlueAlliance = Variables.isBlueAlliance;
-        }
-    }
 
     public static Command getAutonomousCommand() {
         return auto;
